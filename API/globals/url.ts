@@ -1,1 +1,1 @@
-export const API_URL="https://wize-consultancy.vercel.app/";
+export const API_URL="https://wize-admin-version.vercel.app";
