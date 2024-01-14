@@ -1,0 +1,42 @@
+.statsSection>*{
+    color:#ff637b;
+}  
+.statsSection .icon{
+    color:#f7a77c;
+}
+.clientRecords>div{
+    display:flex;
+}
+.clientRecords .icon{
+    font-size:60px;
+    color:#f7a77c;
+}
+.clientRecords h5{
+    font-weight:bold;
+    font-size:30px;
+    color:black;
+}
+.iconContainer--statsSection{
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffdecc;
+    padding:10px;
+}
+.iconContainer--statsSection>*{
+    color:#f7a77c;
+    font-size:30px;
+}
+
+@media (min-width:768px) and (max-width: 1000px) {
+    .para--statsSection{
+        font-size: 12px;
+    }
+    .title--statsSection{
+        font-size:18px;
+    }
+    .statsSection .icon{
+        display:none;
+    }
+}

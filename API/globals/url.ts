@@ -1,0 +1,1 @@
+export const API_URL="https://wize-consultancy.vercel.app/";

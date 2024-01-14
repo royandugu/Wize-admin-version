@@ -1,0 +1,9 @@
+.navigationContainer>*{
+    font-weight:bold;
+}
+.navigationContainer>.navigationContainer--noDropDowns :hover,.navigationContainer .navigationContainer--dropDowns:hover{
+    color:#FD677A;
+}
+.navigationContainer .navigationContainer--dropDowns{
+    cursor: pointer;
+}

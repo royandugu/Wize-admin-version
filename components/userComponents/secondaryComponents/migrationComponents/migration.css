@@ -1,0 +1,10 @@
+.ulContainer ul, .ulContainer ol{
+    padding:10px;
+}
+.ulContainer ul{
+    list-style-type: disc;
+}
+.ulContainer ol{
+    list-style-type:decimal;
+}
+

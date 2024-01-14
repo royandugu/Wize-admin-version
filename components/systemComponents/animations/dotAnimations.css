@@ -1,0 +1,26 @@
+.dot-container {
+  display: grid;
+  grid-template-columns: repeat(6, 20px); /* Adjust the number of columns as needed */
+  gap: 5px; /* Adjust the gap between dots as needed */
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #ff637b;
+  border-radius: 50%;
+  margin: 5px;
+  opacity: 0;
+  animation: dotAnimation 5s linear infinite;
+}
+
+@keyframes dotAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

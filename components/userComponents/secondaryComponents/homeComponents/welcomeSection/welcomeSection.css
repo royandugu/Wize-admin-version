@@ -1,0 +1,8 @@
+.welcomeSection .topTitle{
+    font-size:30px;
+}
+@media only screen and (min-width: 1220px){
+    .welcomeSection .smallImage{
+        display:none;
+    }
+}

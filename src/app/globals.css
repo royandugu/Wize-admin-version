@@ -1,0 +1,77 @@
+/* styles/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Your custom styles go here */
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family: 'Proxima Nova';
+}
+
+/* UI */
+.mainGradient{
+    background: linear-gradient(to right, #ff637b 0%, #f7a77c 100%);
+}
+.mainGradient-txt{
+    color: linear-gradient(to right, #ff637b 0%, #f7a77c 100%);
+}
+
+/* Functionalities */
+.scrollUp{
+    transform:scaleY(0);
+}
+.scrollDown{
+    transform:scaleY(1);
+}
+.scrollXVisible{
+    transform:scaleX(1);
+}
+.scrollXInvisible{
+    transform:scaleX(0);
+}
+.scrollDown,.scrollUp,.scrollXVisible,.scrollXInvisible{
+    transition: .5s ease-in-out;
+}
+.backgroundOne{
+    background:url("../../public/images/bgImages.jpg");
+    background-size: cover;   
+}
+.backgroundOne > .flex{
+    background:rgba(193,234,254,.8);
+}
+.backgroundTwo{
+    background:url("../../public/images/sydney-cbd-from-ferry-boat2.jpg");
+    background-size: cover;
+}
+.backgroundTwo > .flex{
+    background:rgba(193,234,254,.8);
+}  
+
+.fileType{
+    cursor:pointer;   
+}
+.fileType>.currentImgBackground>.fileUpload{
+    height:100px;
+    width:100px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:rgba(25, 135, 84,.4);
+}
+.fileType>.currentImgBackground>.fileUpload>.plusIcon , .fileType>.fileUpload>.plusIcon{
+    color:white;
+    font-size:60px;
+}
+.noBorder{
+    border:none !important;
+    display:none;
+}
+  

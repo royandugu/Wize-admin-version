@@ -1,0 +1,26 @@
+.loginAndRegisterForm input{
+    height:50px;
+    border:1px solid grey;
+    margin-top:10px;
+    padding-left:10px;
+}
+.loginAndRegisterForm button{
+    background:black;
+    color:white;
+    padding:20px;
+    margin-top:20px;
+}
+.fileType>.currentImgBackground>.fileUpload--updateProfilePfp>.plusIcon{
+    color:white;
+    font-size:150px;
+}
+.fileType>.currentImgBackground>.fileUpload--updateProfilePfp{
+    height:300px;
+    width:300px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:rgba(25, 135, 84,.4);
+    margin-top:20px;
+}

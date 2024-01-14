@@ -1,0 +1,6 @@
+.dropDownMenu{
+    border-top:5px solid #FD677A;
+}
+.dropDownMenu li :hover{
+    color:#FD677A;
+}

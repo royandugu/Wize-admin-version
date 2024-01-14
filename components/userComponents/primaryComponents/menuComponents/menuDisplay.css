@@ -1,0 +1,11 @@
+.title{
+    font-size:30px;
+}
+.menuDisplay>*{
+    transition:.5s ease-in-out;
+}
+@media screen and (max-width: 768px) {
+    .smlContactAndSearchContainer{
+        display:none;
+    }
+}
