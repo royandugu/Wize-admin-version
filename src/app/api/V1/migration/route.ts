@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { getOneData } from "../../../../../API/controllers/controllers";
 
 import migrationModel from "../../../../../API/models/migration/migrationModel";
-
+export const dynamic = 'force-dynamic';
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
         const response=await getOneData(migrationModel);

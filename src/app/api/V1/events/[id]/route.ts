@@ -3,7 +3,7 @@ import { getIndvData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import eventModel from "../../../../../../API/models/eventModel/eventModel";
-
+export const dynamic = 'force-dynamic';
 export const GET=async (request:NextRequest,{params}:{params:{id:any}}):Promise<any>=>{
     try{
     const {id}=params;

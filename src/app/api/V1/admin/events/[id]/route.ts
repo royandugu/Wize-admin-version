@@ -3,7 +3,7 @@ import { updateData, deleteData } from "../../../../../../../API/controllers/con
 import { StatusCodes } from "http-status-codes";
 
 import eventModel from "../../../../../../../API/models/eventModel/eventModel";
-
+export const dynamic = 'force-dynamic';
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;

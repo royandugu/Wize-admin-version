@@ -3,7 +3,7 @@ import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import trModel from "../../../../../../API/models/migration/trModel";
-
+export const dynamic = 'force-dynamic';
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
         const response=await getOneData(trModel);

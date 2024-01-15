@@ -3,6 +3,7 @@ import { createData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import educationModel from "../../../../../../API/models/educationModel/educationModel";
+export const dynamic = 'force-dynamic';
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{

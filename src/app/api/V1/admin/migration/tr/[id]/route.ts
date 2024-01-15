@@ -3,7 +3,7 @@ import { updateData } from "../../../../../../../../API/controllers/controllers"
 import { StatusCodes } from "http-status-codes";
 
 import trModel from "../../../../../../../../API/models/migration/trModel";
-
+export const dynamic = 'force-dynamic';
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;

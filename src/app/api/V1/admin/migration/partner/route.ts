@@ -3,7 +3,7 @@ import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import partnerModel from "../../../../../../../API/models/migration/partnerModel";
-
+export const dynamic = 'force-dynamic';
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();

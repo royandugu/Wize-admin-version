@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import { createData } from "../../../../../../API/controllers/controllers";
 
 import eventModel from "../../../../../../API/models/eventModel/eventModel";
-
+export const dynamic = 'force-dynamic';
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
