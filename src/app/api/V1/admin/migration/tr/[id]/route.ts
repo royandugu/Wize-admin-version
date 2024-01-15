@@ -1,12 +1,14 @@
 import { NextRequest,NextResponse } from "next/server";
-import { updateTr } from "../../../../../../../../API/controllers/admin/adminTrController";
+import { updateData } from "../../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import trModel from "../../../../../../../../API/models/migration/trModel";
 
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;
         const jsonReq=await request.json();
-        const response=await updateTr(id,jsonReq);
+        const response=await updateData(id,jsonReq,trModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

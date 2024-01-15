@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getPartnerPage } from "../../../../../../API/controllers/system/systemPartnerController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import partnerModel from "../../../../../../API/models/migration/partnerModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getPartnerPage();
+        const response=await getOneData(partnerModel);
         return NextResponse.json({message:response.message,partner:response.bodyData},{status:response.status})
     }
     catch(err:any){

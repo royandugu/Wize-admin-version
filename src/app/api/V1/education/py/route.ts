@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getPy } from "../../../../../../API/controllers/system/systemPyController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import { pyModel } from "../../../../../../API/models/commonModel/commonModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getPy();
+        const response=await getOneData(pyModel);
         return NextResponse.json({message:response.message,py:response.bodyData},{status:response.status})
     }
     catch(err:any){

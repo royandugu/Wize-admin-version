@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createTr } from "../../../../../../../API/controllers/admin/adminTrController";
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import trModel from "../../../../../../../API/models/migration/trModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createTr(jsonReq);
+        const response=await createData(jsonReq,trModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

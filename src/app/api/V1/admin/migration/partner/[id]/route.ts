@@ -1,12 +1,14 @@
 import { NextRequest,NextResponse } from "next/server";
-import { updatePartner } from "../../../../../../../../API/controllers/admin/adminPartnerController";
+import { updateData } from "../../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import partnerModel from "../../../../../../../../API/models/migration/partnerModel";
 
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;
         const jsonReq=await request.json();
-        const response=await updatePartner(id,jsonReq);
+        const response=await updateData(id,jsonReq,partnerModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

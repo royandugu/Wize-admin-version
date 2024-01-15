@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { createVisitor } from "../../../../../../../API/controllers/admin/adminVisitorController";
 import { StatusCodes } from "http-status-codes";
+import { createData } from "../../../../../../../API/controllers/controllers";
+
+import visitorModel from "../../../../../../../API/models/migration/visitorModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createVisitor(jsonReq);
+        const response=await createData(jsonReq,visitorModel);
         return NextResponse.json({message:response.message,createdVisitor:response.bodyData},{status:response.status})
     }
     catch(err:any){

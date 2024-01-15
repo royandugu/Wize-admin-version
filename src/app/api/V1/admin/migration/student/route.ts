@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createStudent } from "../../../../../../../API/controllers/admin/adminStudentController";
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import studentModel from "../../../../../../../API/models/migration/studentModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createStudent(jsonReq);
+        const response=await createData(jsonReq,studentModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

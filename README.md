@@ -31,7 +31,7 @@ Folder structuring
         For our own we can put things like lg+100, which means lg=1024 and lg+100=1124 which is our another breakpoint
 
 
-## Refactoring notes
- # 31st dec 2023
+## API routes
+
  
  

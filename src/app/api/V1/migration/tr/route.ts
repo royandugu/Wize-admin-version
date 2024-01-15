@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getTrPage } from "../../../../../../API/controllers/system/systemTrController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import trModel from "../../../../../../API/models/migration/trModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getTrPage();
+        const response=await getOneData(trModel);
         return NextResponse.json({message:response.message,tr:response.bodyData},{status:response.status})
     }
     catch(err:any){

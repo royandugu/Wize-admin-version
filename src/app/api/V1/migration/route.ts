@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { StatusCodes } from "http-status-codes";
-import { getMigration } from "../../../../../API/controllers/system/systemMigrationController";
+import { getOneData } from "../../../../../API/controllers/controllers";
+
+import migrationModel from "../../../../../API/models/migration/migrationModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getMigration();
+        const response=await getOneData(migrationModel);
         return NextResponse.json({message:response.message,migration:response.bodyData},{status:response.status})
     }
     catch(err:any){

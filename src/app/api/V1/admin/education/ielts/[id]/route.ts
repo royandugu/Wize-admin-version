@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { updateIelts } from "../../../../../../../../API/controllers/admin/adminIeltsController";
 import { StatusCodes } from "http-status-codes";
+import { updateData } from "../../../../../../../../API/controllers/controllers";
+import { ieltsModel } from "../../../../../../../../API/models/commonModel/commonModel";
 
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;
         const jsonReq=await request.json();
-        const response=await updateIelts(id,jsonReq);
+        const response=await updateData(id,jsonReq,ieltsModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

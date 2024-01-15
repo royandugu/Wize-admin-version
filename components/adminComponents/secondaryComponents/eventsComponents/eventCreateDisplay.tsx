@@ -133,7 +133,6 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
             }
             else {
                 const response=await commonSubmitter(universalPatch,url,image);
-                console.log(response);
                 if(response.ok){
                     contextContainer.setLoading(2);
                     discardForm(e);    
@@ -166,7 +165,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
     }
 
     useEffect(()=>{
-        if(status==="success"){
+        if(status==="success" && prop.updateId){
             formBody.title=data.title;
             setImage(data.banner);
             setEventBody(data.body);

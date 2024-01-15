@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { registerUser } from "../../../../../API/controllers/user/registerAndLogin";
+import { createData } from "../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import userModel from "../../../../../API/models/userModel/userModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const requestBody=await request.json();
-        const response=await registerUser(requestBody);
+        const response=await createData(requestBody,userModel);
         return NextResponse.json({message:response.message},{status:StatusCodes.CREATED});
     }
     catch(err:any){

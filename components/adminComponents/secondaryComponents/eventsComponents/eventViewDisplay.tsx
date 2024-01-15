@@ -34,6 +34,8 @@ const EventViewDisplay = () => {
 
     const { data, status, refetch } = useQuery("all-events", () => universalGet("/events"));
 
+    console.log(data);
+
     useEffect(()=>{
         contextContainer.setLoading(1);
         refetch();
@@ -63,7 +65,7 @@ const EventViewDisplay = () => {
     if (status === "loading") return <Spinner />
     else if (status === "error") return <h1> Data fetch error </h1>
     else if (status === "success") {
-        const newData = data.map((item: any) => {
+        const newData = data.length>0 && data.map((item: any) => {
             const formattedStartDate = new Date(item.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
 
             const formattedEndDate = new Date(item.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});

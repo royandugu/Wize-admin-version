@@ -36,7 +36,7 @@ const Table = (props: Table) => {
                 <th key={id} className="px-10 py-5 border border-[rgb(200,200,200)]"> {tr} </th>
               ))}
             </tr>
-            {props.tableCols.map((item: any, index) => (
+            {props.tableCols.length>0 && props.tableCols.map((item: any, index) => (
               <tr key={index} className="p-4 mb-4">
                 {props.dataKeys.map((key, i) => (
                   <td key={i} className="p-5 border border-[rgb(200,200,200)]">

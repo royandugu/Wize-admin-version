@@ -1,12 +1,14 @@
 import { NextRequest,NextResponse } from "next/server";
-import { updateEvent,deleteEvent } from "../../../../../../../API/controllers/admin/adminEventController";
+import { updateData, deleteData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import eventModel from "../../../../../../../API/models/eventModel/eventModel";
 
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;
         const jsonReq=await request.json();
-        const response=await updateEvent(id,jsonReq);
+        const response=await updateData(id,jsonReq,eventModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){
@@ -17,7 +19,7 @@ export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Pro
 export const DELETE=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
         const {id}=params;
-        const response=await deleteEvent(id);
+        const response=await deleteData(id,eventModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

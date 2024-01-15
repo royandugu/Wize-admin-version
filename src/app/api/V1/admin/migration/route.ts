@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createMigration } from "../../../../../../API/controllers/admin/adminMigrationController";
+import { createData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import migrationModel from "../../../../../../API/models/migration/migrationModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createMigration(jsonReq);
+        const response=await createData(jsonReq,migrationModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

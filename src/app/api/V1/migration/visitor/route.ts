@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getVisitorPage } from "../../../../../../API/controllers/system/systemVisitorController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
+
+import visitorModel from "../../../../../../API/models/migration/visitorModel";
 
 import { StatusCodes } from "http-status-codes";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getVisitorPage();
+        const response=await getOneData(visitorModel);
         return NextResponse.json({message:response.message,visitor:response.bodyData},{status:response.status})
     }
     catch(err:any){

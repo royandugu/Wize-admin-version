@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createPte } from "../../../../../../../API/controllers/admin/adminPteController";
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import { pteModel } from "../../../../../../../API/models/commonModel/commonModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createPte(jsonReq);
+        const response=await createData(jsonReq,pteModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

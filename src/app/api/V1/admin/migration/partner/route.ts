@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createPartner } from "../../../../../../../API/controllers/admin/adminPartnerController";
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import partnerModel from "../../../../../../../API/models/migration/partnerModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createPartner(jsonReq);
+        const response=await createData(jsonReq,partnerModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

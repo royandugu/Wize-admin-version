@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getPte } from "../../../../../../API/controllers/system/systemPteController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import { pteModel } from "../../../../../../API/models/commonModel/commonModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getPte();
+        const response=await getOneData(pteModel);
         return NextResponse.json({message:response.message,pte:response.bodyData},{status:response.status})
     }
     catch(err:any){

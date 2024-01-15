@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createEvent} from "../../../../../../API/controllers/admin/adminEventController";
 import { StatusCodes } from "http-status-codes";
+
+import { createData } from "../../../../../../API/controllers/controllers";
+
+import eventModel from "../../../../../../API/models/eventModel/eventModel";
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createEvent(jsonReq);
+        const response=await createData(jsonReq,eventModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

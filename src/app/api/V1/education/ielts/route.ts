@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getIelts } from "../../../../../../API/controllers/system/systemIeltsController";
+import { getOneData } from "../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+
+import { ieltsModel } from "../../../../../../API/models/commonModel/commonModel";
 
 export const GET=async (request:NextRequest):Promise<any>=>{
     try{
-        const response=await getIelts();
+        const response=await getOneData(ieltsModel);
         return NextResponse.json({message:response.message,ielts:response.bodyData},{status:response.status})
     }
     catch(err:any){
