@@ -7,4 +7,18 @@
 .ulContainer ol{
     list-style-type:decimal;
 }
-
+.ulContainer h1{
+    font-size:30px;
+}
+.ulContainer h2{
+    font-size:28px;
+}
+.ulContainer h3{
+    font-size:25px;
+}
+.ulContainer h4{
+    font-size:20px;
+}
+.ulContainer h5{
+    font-size:18px;
+}

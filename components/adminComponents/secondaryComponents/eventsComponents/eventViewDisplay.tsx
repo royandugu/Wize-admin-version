@@ -69,12 +69,12 @@ const EventViewDisplay = () => {
             const formattedStartDate = new Date(item.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
 
             const formattedEndDate = new Date(item.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});
-
+            
             return {
                 ...item,
                 startDate:formattedStartDate,
                 endDate:formattedEndDate,
-                body: parse(item.body.slice(0, 100))
+                body: parse(item.body.slice(0,100))
             };
         });
         return (
