@@ -1,0 +1,13 @@
+.pulse-div {
+    animation: pulse 1s infinite alternate; /* Use the 'pulse' animation with a duration of 2 seconds, infinitely repeating in alternate mode */
+}
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1); /* Initial size */
+    }
+    100% {
+      transform: scale(1.2); /* Enlarged size */
+    }
+  }
+  

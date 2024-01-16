@@ -5,7 +5,6 @@ type DeleteImage={
 const returnObj:DeleteImage={status:false};
 
 export const deleteImage=async (url:string|undefined, edgestore:any):Promise<{status:boolean}>=>{
-  console.log(url)
   try {
         if (url) {
           const res=await edgestore.publicFiles.delete({

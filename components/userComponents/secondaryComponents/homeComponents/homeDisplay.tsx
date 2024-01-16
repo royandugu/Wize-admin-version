@@ -3,6 +3,7 @@ import FeaturesSection from "./featuresSection/featuresSection";
 import StatsSection from "./statsSection/statsSection";
 import OptionSection from "./optionSection/optionSection";
 import TestimonialSection from "./testimonialSection/testimonialSection";
+import QuizPopUp from "../../../systemComponents/modules/quizPopUp";
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -17,6 +18,7 @@ const HomeDisplay = () => {
             <StatsSection/>
             <OptionSection/>
             <TestimonialSection/>
+            <QuizPopUp/>
         </>
     )
 }

@@ -13,7 +13,6 @@ import { useContext } from "react";
 import { uploadImage } from "../../../systemComponents/microFunctions/uploadImage";
 import { EventType } from "../../../systemComponents/types/types";
 import { useQuery } from "react-query";
-import { useQueryClient } from "react-query";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
