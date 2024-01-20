@@ -29,8 +29,6 @@ const PopUp = (props: PopUp) => {
             <div className={`absolute left-[-12px] right-[-12px] inset-0 bg-[rgba(0,0,0,.6)] ${!props.showPopUp && 'hidden'}`} onClick={() => {
                 if(props.contextContainer.loading!==0) {
                     if(props.contextContainer.loading === 2 && props.finalNavigation) {
-                        console.log("Here I am");
-                        console.log(props.finalNavigation);
                         return router.push(props.finalNavigation);
                     }
                     else {

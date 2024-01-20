@@ -4,7 +4,8 @@ import React from "react";
 
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { EventType } from "../../systemComponents/types/types";
+import { FaRegEye } from "react-icons/fa";
+
 import Link from "next/link";
 
 type Table = {
@@ -16,8 +17,9 @@ type Table = {
   parseOn?: number;
   hasPopUp?:boolean;
   setShowPopUp?:React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedData:React.Dispatch<React.SetStateAction<EventType>>;
+  setSelectedData:React.Dispatch<React.SetStateAction<any>>;
   updateDestination?:string
+  eye?:boolean
 }
 
 const Table = (props: Table) => {
@@ -45,11 +47,14 @@ const Table = (props: Table) => {
                 ))}
                 <td className="p-5 border border-[rgb(200,200,200)]">
                   <div className="flex justify-center items-center gap-5">
-                    <Link href={`${props.updateDestination}/${item._id}`}><FaPencilAlt size={25} className="text-grad-one cursor-pointer" /></Link>
+                    {!props.eye ? <><Link href={`${props.updateDestination}/${item._id}`}><FaPencilAlt size={25} className="text-grad-one cursor-pointer" /></Link>
                     <MdDelete size={30} className="text-grad-two cursor-pointer" onClick={()=>{
                       props.setSelectedData(item)
                       props.setShowPopUp && props.setShowPopUp(true)
-                    }}/>
+                    }}/></>:<FaRegEye size={30} className="text-green-400 hover:text-green-500 cursor-pointer" onClick={()=>{
+                      props.setSelectedData(item._id);
+                      props.setShowPopUp && props.setShowPopUp(true)
+                    }}/>}
                   </div>
                 </td>
               </tr>

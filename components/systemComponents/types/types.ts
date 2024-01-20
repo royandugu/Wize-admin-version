@@ -33,3 +33,18 @@ export type educationProp = {
     imageTwo: string
     setImageTwo?: Dispatch<SetStateAction<string>>
 }
+
+export type quizProp={
+    industry:string,
+    qualification:string,
+    yearExp:string,
+    placeExp:string,
+    state:string, 
+    formalQualifications:string,
+    firstName:string,
+    lastName:string,
+    contactNumber:string,
+    email:string,
+    questionsForUs:string
+}
+

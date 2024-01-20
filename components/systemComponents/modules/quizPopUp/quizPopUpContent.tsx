@@ -1,18 +1,25 @@
 import { industry, automotive, buildAndCons, buisnessAndFin, civilConstruction, commercialCook } from "../../staticComponents/quizPopUpContents";
 import { Dispatch, SetStateAction } from "react";
+import { quizProp } from "../../types/types";
 
 type QuizPopUpType = {
     pageNumber?: number,
-    pagesData: { industry: string, qualification: string }
-    setPagesData: Dispatch<SetStateAction<{ industry: string, qualification: string }>>
-    labels: { industry: string, qualification: string }
+    pagesData: quizProp,
+    setPagesData: Dispatch<SetStateAction<quizProp>>
+    labels: quizProp
 }
 
-const SquareBox = ({ texts, images }: { texts: Array<string>, images?:Array<string> }) => {
+const SquareBox = ({ texts, images, setPagesData, pagesData, keyNumber }: { texts: Array<string>, images?:Array<string>, pagesData:quizProp, setPagesData:Dispatch<SetStateAction<quizProp>>, keyNumber:number }) => {
+
     return (
         <div className={`flex ${texts.length>4 && 'flex-wrap'} justify-center mt-5 gap-3`}>
             {texts.map((text, i) => (
-                <div key={i} className="bg-white p-5 border-[3px] border-grad-one flex justify-center items-center cursor-pointer rounded-lg hover:bg-grad-one hover:text-white"> 
+                <div key={i} className={`${(keyNumber === 0 && pagesData.yearExp === text) && 'bg-grad-one text-white'} ${(keyNumber === 1 && pagesData.placeExp === text) && 'bg-grad-one text-white'} ${(keyNumber === 2 && pagesData.state === text) && 'bg-grad-one text-white'} ${(keyNumber === 3 && pagesData.formalQualifications === text) && 'bg-grad-one text-white'} p-5 border-[3px] border-grad-one flex justify-center items-center cursor-pointer rounded-lg hover:bg-grad-one hover:text-white`} onClick={()=>{
+                    if(keyNumber === 0) setPagesData({...pagesData,yearExp:text});
+                    else if(keyNumber === 1) setPagesData({...pagesData,placeExp:text});
+                    else if(keyNumber === 2) setPagesData({...pagesData,state:text});
+                    else if(keyNumber === 3) setPagesData({...pagesData,formalQualifications:text});
+                }}> 
                     {images && <img src={images[i]}/>}
                     {text} 
                 </div>
@@ -49,7 +56,6 @@ const PageNumberOneContent = ({ pagesData, setPagesData, labels }: QuizPopUpType
                         <option key={i} value={ind}> {ind} </option>
                     ))
                 }
-
             </select>
         </>
     )
@@ -59,9 +65,11 @@ const PageNumberTwoContent = ({ pagesData, setPagesData, labels }: QuizPopUpType
     return (
         <>
             <h1 className="text-[25px] text-grad-one"> How many years of relevant work experience do you have ? </h1>
-            <SquareBox texts={["1-2 years", "3-4 years", "5-9 years", "10+ years"]} />
+            {labels.yearExp !== "" && <h5 className="text-red-500"> {labels.yearExp} </h5>}
+            <SquareBox texts={["1-2 years", "3-4 years", "5-9 years", "10+ years"]} setPagesData={setPagesData} pagesData={pagesData} keyNumber={0}/>
             <h1 className="text-[25px] text-grad-one mt-5"> Where is your work experience ? </h1>
-            <SquareBox texts={["Australia", "Overseas", "Both"]} />
+            {labels.placeExp !== "" && <h5 className="text-red-500"> {labels.placeExp} </h5>}
+            <SquareBox texts={["Australia", "Overseas", "Both"]} setPagesData={setPagesData} pagesData={pagesData} keyNumber={1}/>
         </>
     )
 }
@@ -70,7 +78,8 @@ const PageNumberThreeContent = ({ pagesData, setPagesData, labels }: QuizPopUpTy
     return (
         <>
             <h1 className="text-[25px] text-grad-one">  What state do you live in ? </h1>
-            <SquareBox texts={["NSW", "VIC", "QLD", "SA","WA","ACT","NT","TAS"]} />
+            {labels.state !== "" && <h5 className="text-red-500"> {labels.state} </h5>}
+            <SquareBox texts={["NSW", "VIC", "QLD", "SA","WA","ACT","NT","TAS"]} setPagesData={setPagesData} pagesData={pagesData} keyNumber={2}/>
         </>
     )
 }
@@ -79,7 +88,8 @@ const PageNumberFourContent = ({ pagesData, setPagesData, labels }: QuizPopUpTyp
     return (
         <>
             <h1 className="text-[25px] text-grad-one">  Do you have any formal qualifications ? </h1>
-            <SquareBox texts={["YES","NO"]} />
+            {labels.formalQualifications !== "" && <h5 className="text-red-500"> {labels.formalQualifications} </h5>}
+            <SquareBox texts={["YES","NO"]} setPagesData={setPagesData} pagesData={pagesData} keyNumber={3}/>
         </>
     )
 }
@@ -88,10 +98,19 @@ const PageNumberFiveContent = ({ pagesData, setPagesData, labels }: QuizPopUpTyp
     return (
         <>
             <h1 className="text-[25px] text-grad-one">  Enter your details </h1>
-            <form>
-                <input type="text" placeholder=""/>
+            {labels.firstName !== "" && <h5 className="text-red-500"> {labels.firstName} </h5>}
+            {labels.lastName !== "" && <h5 className="text-red-500"> {labels.lastName} </h5>}
+            {labels.email !== "" && <h5 className="text-red-500"> {labels.email} </h5>}
+            {labels.contactNumber !== "" && <h5 className="text-red-500"> {labels.contactNumber} </h5>}
+            <form className="pt-3 w-full">
+                <div className="flex gap-2">
+                    <input type="text" placeholder="Enter your first name*" className=" border-[2px] border-grad-one rounded-lg pl-3 pt-2 pb-2 w-full" onChange={(e)=>setPagesData({...pagesData,firstName:e.target.value})}/>
+                    <input type="text" placeholder="Enter your last name*" className=" border-[2px] border-grad-one rounded-lg pl-3 pt-2 pb-2 w-full" onChange={(e)=>setPagesData({...pagesData,lastName:e.target.value})}/>
+                </div>
+                <input type="text" placeholder="Contact number*" className=" border-[2px] border-grad-one rounded-lg pl-3 pt-2 pb-2 mt-2 w-full" onChange={(e)=>setPagesData({...pagesData,contactNumber:e.target.value})}/>
+                <input type="text" placeholder="Email*" className=" border-[2px] border-grad-one rounded-lg pl-3 pt-2 pb-2 mt-2 w-full" onChange={(e)=>setPagesData({...pagesData,email:e.target.value})}/>
+                <textarea placeholder="Any questions for us?" className=" border-[2px] border-grad-one rounded-lg pl-3 pt-2 pb-2 mt-2 w-full" onChange={(e)=>setPagesData({...pagesData,questionsForUs:e.target.value})}/>   
             </form>
-            <SquareBox texts={["YES","NO"]} />
         </>
     )
 }
@@ -104,8 +123,7 @@ const QuizPopUpContent = ({ pageNumber, pagesData, setPagesData, labels }: QuizP
                 <div className="w-[50%] h-[20px] bg-grad-one rounded-xl" />
             </div>
 
-            {pageNumber === 1 ?
-                <PageNumberOneContent pagesData={pagesData} setPagesData={setPagesData} labels={labels} /> : pageNumber === 2 ? <PageNumberTwoContent pagesData={pagesData} setPagesData={setPagesData} labels={labels} /> : pageNumber === 3 ? <PageNumberThreeContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>:pageNumber === 4 ? <PageNumberFourContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>:<PageNumberFiveContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>}
+            {pageNumber === 1 ? <PageNumberOneContent pagesData={pagesData} setPagesData={setPagesData} labels={labels} /> : pageNumber === 2 ? <PageNumberTwoContent pagesData={pagesData} setPagesData={setPagesData} labels={labels} /> : pageNumber === 3 ? <PageNumberThreeContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>:pageNumber === 4 ? <PageNumberFourContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>:<PageNumberFiveContent pagesData={pagesData} setPagesData={setPagesData} labels={labels}/>}
         </div>
 
     )
