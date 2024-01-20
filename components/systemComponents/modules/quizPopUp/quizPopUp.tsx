@@ -126,7 +126,7 @@ const QuizPopUp = () => {
     return (
         <>
             <div className={`${!popUp && 'hidden'} fixed left-[-12px] right-[-12px] inset-0 bg-[rgba(0,0,0,.8)] z-99`} onClick={() => setPopUp(false)}> </div>
-            <div className={`${!popUp && 'hidden'} fixed flex flex-col items-center top-1/4 left-1/3 right-1/3 p-10 px-20 bg-white rounded-xl border-[5px] border-grad-one z-999`}>
+            <div className={`${!popUp && 'hidden'} fixed flex flex-col items-center top-1/4 left-[20px] right-[20px] md:left-[50px] md:right-[50px]  lg:left-1/4 lg:right-1/4 lg+196:left-1/3 lg+196:right-1/3 p-5 md:p-10 lg:px-20 bg-white rounded-xl border-[5px] border-grad-one z-999`}>
                 {contextContainer.loading === 0 ? <Spinner button={true}/> : contextContainer.loading === 2 ? <h1 className="text-green-500"> Sucesfully sent your data </h1> : contextContainer.loading === 3 ? <h1 className="text-red-500"> Error sending data </h1> : <>
                     <QuizPopUpContent pageNumber={pageNumber} pagesData={pagesData} setPagesData={setPagesData} labels={labels} resume={resume} setResume={setResume}/>
                     <div className="mt-5" />

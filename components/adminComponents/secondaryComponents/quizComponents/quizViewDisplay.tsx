@@ -12,7 +12,7 @@ const QuizViewDisplay = () => {
     const [showPopUp, setShowPopUp] = useState(false);
     const [selectedQuizId, setSelectedQuizId] = useState("");
 
-    const { data, status } = useQuery("education-page", () => universalGet("/admin/quiz"));
+    const { data, status } = useQuery("quiz-data", () => universalGet("/admin/quiz"));
 
     if(status === "loading") return <Spinner/>
     else if(status === "error") return <h5> Error fetching data </h5>
