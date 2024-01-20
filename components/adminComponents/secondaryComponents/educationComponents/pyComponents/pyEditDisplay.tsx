@@ -11,8 +11,8 @@ import MainPySection from "../../../../userComponents/secondaryComponents/educat
 import ButtonDesign from "../../../../systemComponents/modules/buttonDesign";
 import PopUp from "../../../../systemComponents/modules/popUp";
 import context from "../../../../systemComponents/context/context";
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../../systemComponents/apiConnectors/system/PATCH";
 
 const PyEditDisplay = () => {
@@ -77,9 +77,9 @@ const PyEditDisplay = () => {
             }
 
             if (pictureOne) {
-                const { status: pictureOneStatus } = await deleteImage(actualImage.imageOne, edgestore);
+                const { status: pictureOneStatus } = await deleteFile(actualImage.imageOne, edgestore);
                 if (pictureOneStatus) {
-                    const { data, status } = await uploadImage(pictureOne, edgestore);
+                    const { data, status } = await uploadFile(pictureOne, edgestore);
                     if (status) {
                         uploadData.dataOne = data;
                     }
@@ -95,9 +95,9 @@ const PyEditDisplay = () => {
             }
 
             if (pictureTwo) {
-                const { status: pictureTwoStatus } = await deleteImage(actualImage.imageTwo, edgestore);
+                const { status: pictureTwoStatus } = await deleteFile(actualImage.imageTwo, edgestore);
                 if (pictureTwoStatus) {
-                    const { data, status } = await uploadImage(pictureTwo, edgestore);
+                    const { data, status } = await uploadFile(pictureTwo, edgestore);
                     if (status) {
                         uploadData.dataTwo = data;
                     }

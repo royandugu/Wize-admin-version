@@ -1,11 +1,11 @@
-type UploadImage={
+type UploadFile={
     data:string;
     status:boolean;
 }
 
-const returnObj:UploadImage={data:"", status:false};
+const returnObj:UploadFile={data:"", status:false};
 
-export const uploadImage=async (file:File|undefined, edgestore:any):Promise<{data:string, status:boolean}>=>{
+export const uploadFile=async (file:File|undefined, edgestore:any):Promise<{data:string, status:boolean}>=>{
     try {
         if (file) {
           const res = await edgestore.publicFiles.upload({

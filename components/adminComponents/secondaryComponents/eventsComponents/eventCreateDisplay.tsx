@@ -10,7 +10,7 @@ import Spinner from "../../../systemComponents/modules/spinner";
 import { useEffect, useState } from "react";
 import { useEdgeStore } from '@/lib/edgestore';
 import { useContext } from "react";
-import { uploadImage } from "../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../systemComponents/microFunctions/uploadFile";
 import { EventType } from "../../../systemComponents/types/types";
 import { useQuery } from "react-query";
 
@@ -21,7 +21,7 @@ import { universalJSONPost } from "../../../systemComponents/apiConnectors/syste
 import { universalIndvGet } from "../../../systemComponents/apiConnectors/system/GET";
 
 import PopUp from "../../../systemComponents/modules/popUp";
-import { deleteImage } from "../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../systemComponents/apiConnectors/system/PATCH";
 
 type EventCreateDisplay = {
@@ -87,7 +87,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         e.preventDefault();
         contextContainer.setLoading(0);
         try {
-            const { data, status } = await uploadImage(file, edgestore);
+            const { data, status } = await uploadFile(file, edgestore);
             if (status) {
                 const response=await commonSubmitter(universalJSONPost,"/admin/events",data);
                 if (response) {
@@ -114,10 +114,10 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         try{
             if(file){
                 console.log(prevImage);
-                const {status:deletionStatus} = await deleteImage(prevImage,edgestore);
+                const {status:deletionStatus} = await deleteFile(prevImage,edgestore);
                 console.log(deletionStatus);
                 if(deletionStatus){
-                    const {data,status}=await uploadImage(file,edgestore);
+                    const {data,status}=await uploadFile(file,edgestore);
                     if(status) {
                         const response=await commonSubmitter(universalPatch,url,data);
                         if(response.ok){

@@ -12,12 +12,12 @@ import Spinner from "../../../../systemComponents/modules/spinner";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
 import { universalGet } from "../../../../systemComponents/apiConnectors/system/GET";
 import { useQuery } from "react-query";
 
 import 'react-quill/dist/quill.snow.css';
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../../systemComponents/apiConnectors/system/PATCH";
 
 const PartnerEditDisplay = () => {
@@ -61,9 +61,9 @@ const PartnerEditDisplay = () => {
 
         try{
             if(fileOne){
-                const {status:deleteStatus} = await deleteImage(originalImage.imageOne,edgestore);
+                const {status:deleteStatus} = await deleteFile(originalImage.imageOne,edgestore);
                 if(deleteStatus){
-                    const {data,status:uploadStatus} = await uploadImage(fileOne,edgestore);
+                    const {data,status:uploadStatus} = await uploadFile(fileOne,edgestore);
                     if(uploadStatus) updatedImages.imageOne=data;
                     else{
                         contextContainer.setLoading(3);
@@ -76,9 +76,9 @@ const PartnerEditDisplay = () => {
                 }
             }
             if(fileTwo){
-                const {status:deleteStatus} = await deleteImage(originalImage.imageTwo,edgestore);
+                const {status:deleteStatus} = await deleteFile(originalImage.imageTwo,edgestore);
                 if(deleteStatus){
-                    const {data,status:uploadStatus} = await uploadImage(fileTwo,edgestore);
+                    const {data,status:uploadStatus} = await uploadFile(fileTwo,edgestore);
                     if(uploadStatus) updatedImages.imageTwo=data;
                     else{
                         contextContainer.setLoading(3);
@@ -91,9 +91,9 @@ const PartnerEditDisplay = () => {
                 }
             }
             if(fileThree){
-                const {status:deleteStatus} = await deleteImage(originalImage.imageThree,edgestore);
+                const {status:deleteStatus} = await deleteFile(originalImage.imageThree,edgestore);
                 if(deleteStatus){
-                    const {data,status:uploadStatus} = await uploadImage(fileThree,edgestore);
+                    const {data,status:uploadStatus} = await uploadFile(fileThree,edgestore);
                     if(uploadStatus) updatedImages.imageThree=data;
                     else{
                         contextContainer.setLoading(3);
@@ -107,9 +107,9 @@ const PartnerEditDisplay = () => {
 
             }
             if(fileFour){
-                const {status:deleteStatus} = await deleteImage(originalImage.imageFour,edgestore);
+                const {status:deleteStatus} = await deleteFile(originalImage.imageFour,edgestore);
                 if(deleteStatus){
-                    const {data,status:uploadStatus} = await uploadImage(fileFour,edgestore);
+                    const {data,status:uploadStatus} = await uploadFile(fileFour,edgestore);
                     if(uploadStatus) updatedImages.imageFour=data;
                     else{
                         contextContainer.setLoading(3);

@@ -11,7 +11,7 @@ import context from '../context/context';
 
 import "./loginAndRegister.css";
 
-import { uploadImage } from '../microFunctions/uploadImage';
+import { uploadFile } from '../microFunctions/uploadFile';
 
 
 export default function Register() {
@@ -30,7 +30,7 @@ export default function Register() {
     e.preventDefault();
     contextContainer.setLoading(0);
     try {
-      const {data,status}=await uploadImage(file,edgestore);
+      const {data,status}=await uploadFile(file,edgestore);
       if(status){
         const body = {
           profilePicture: data,

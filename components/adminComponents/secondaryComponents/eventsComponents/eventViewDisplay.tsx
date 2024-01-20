@@ -3,7 +3,7 @@
 import { useQuery,useQueryClient } from "react-query";
 import { universalGet } from "../../../systemComponents/apiConnectors/system/GET";
 import { useState, useContext, useEffect } from "react";
-import { deleteImage } from "../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { useEdgeStore } from '@/lib/edgestore';
 import { EventType } from "../../../systemComponents/types/types";
 
@@ -46,7 +46,7 @@ const EventViewDisplay = () => {
         e.preventDefault();
         contextContainer.setLoading(0);
         try{
-            const {status}=await deleteImage(selectedEventInfo.banner,edgestore);
+            const {status}=await deleteFile(selectedEventInfo.banner,edgestore);
             if(status && selectedEventInfo._id){
                 const res=await universalDelete("/admin/events",selectedEventInfo._id);
                 if(res.ok) {

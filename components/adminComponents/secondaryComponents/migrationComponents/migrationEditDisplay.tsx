@@ -9,14 +9,14 @@ import { useEdgeStore } from "@/lib/edgestore";
 import ButtonDesign from "../../../systemComponents/modules/buttonDesign";
 import PopUp from "../../../systemComponents/modules/popUp";
 import context from "../../../systemComponents/context/context";
-import { uploadImage } from "../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../systemComponents/microFunctions/uploadFile";
 import { universalJSONPost } from "../../../systemComponents/apiConnectors/system/POST";
 import { useQuery } from "react-query";
 
 import 'react-quill/dist/quill.snow.css';
 import { universalGet } from "../../../systemComponents/apiConnectors/system/GET";
 import Spinner from "../../../systemComponents/modules/spinner";
-import { deleteImage } from "../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../systemComponents/apiConnectors/system/PATCH";
 
 
@@ -48,9 +48,9 @@ const MigrationEditDisplay = () => {
         contextContainer.setLoading(0);
         try {
             if (fileOne) {
-                const { status } = await deleteImage(originalData.imageOne, edgestore);
+                const { status } = await deleteFile(originalData.imageOne, edgestore);
                 if (status) {
-                    const { data, status: imageUploadStatus } = await uploadImage(fileOne, edgestore);
+                    const { data, status: imageUploadStatus } = await uploadFile(fileOne, edgestore);
                     if (imageUploadStatus) updatedContent.imageOne = data;
                     else {
                         contextContainer.setLoading(3);
@@ -63,9 +63,9 @@ const MigrationEditDisplay = () => {
                 }
             }
             if (fileTwo) {
-                const { status } = await deleteImage(originalData.imageTwo, edgestore);
+                const { status } = await deleteFile(originalData.imageTwo, edgestore);
                 if (status) {
-                    const { data, status: imageUploadStatus } = await uploadImage(fileTwo, edgestore);
+                    const { data, status: imageUploadStatus } = await uploadFile(fileTwo, edgestore);
                     if (imageUploadStatus) updatedContent.imageTwo = data;
                     else {
                         contextContainer.setLoading(3);

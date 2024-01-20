@@ -25,6 +25,12 @@ const commonSchema=new mongoose.Schema({
         type:String,
         required:[true,"Formal qualifications must be present"]
     },
+    qualificationText:{
+        type:String,
+    },
+    resumeLocation:{
+        type:String
+    },
     firstName:{
         type:String,
         required:[true,"First name must be present"]

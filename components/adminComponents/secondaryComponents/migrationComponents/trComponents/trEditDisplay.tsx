@@ -8,11 +8,11 @@ import { universalGet } from "../../../../systemComponents/apiConnectors/system/
 
 import dynamic from "next/dynamic";
 import context from "../../../../systemComponents/context/context";
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 
 import ImageUpload from "../../../../systemComponents/modules/imageUpload";
 import ButtonDesign from "../../../../systemComponents/modules/buttonDesign";
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
 import Spinner from "../../../../systemComponents/modules/spinner";
 import PopUp from "../../../../systemComponents/modules/popUp";
 
@@ -47,9 +47,9 @@ const TrEditDisplay = () => {
         contextContainer.setLoading(0);
         try {
             if (file) {
-                const { status } = await deleteImage(originalImage.firstImage, edgestore);
+                const { status } = await deleteFile(originalImage.firstImage, edgestore);
                 if (status) {
-                    const { data: imageData, status } = await uploadImage(file, edgestore);
+                    const { data: imageData, status } = await uploadFile(file, edgestore);
                     if (status) uploadLink.firstImage = imageData;
                     else {
                         contextContainer.setLoading(3);
@@ -64,9 +64,9 @@ const TrEditDisplay = () => {
             }
 
             if(fileTwo){
-                const { status } = await deleteImage(originalImage.secondImage, edgestore);
+                const { status } = await deleteFile(originalImage.secondImage, edgestore);
                 if (status) {
-                    const { data: imageData, status } = await uploadImage(fileTwo, edgestore);
+                    const { data: imageData, status } = await uploadFile(fileTwo, edgestore);
                     if (status) uploadLink.secondImage = imageData;
                     else {
                         contextContainer.setLoading(3);

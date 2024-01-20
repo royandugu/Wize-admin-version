@@ -9,14 +9,26 @@ import QuizPopUpContent from "./quizPopUpContent";
 import context from "../../context/context";
 import { universalJSONPost } from "../../apiConnectors/system/POST";
 import Spinner from "../spinner";
+import { quizProp } from "../../types/types";
+import { uploadFile } from "../../microFunctions/uploadFile";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const QuizPopUp = () => {
     const [popUp, setPopUp] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
-    const [pagesData, setPagesData] = useState({ industry: "", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "" })
-    const [labels, setLabels] = useState({ industry: "", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "" });
+    const [pagesData, setPagesData] = useState<quizProp>({ industry: "", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "", qualificationText:"", resumeLocation:"" })
+    const [labels, setLabels] = useState<quizProp>({ industry: "", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "" });
+    const [resume,setResume]=useState<File>();
 
+    console.log(resume);
+
+    useEffect(()=>{
+        console.log(resume);
+    },[resume])
+    
     const contextContainer = useContext(context);
+
+    const {edgestore}=useEdgeStore();
 
     useEffect(() => {
         contextContainer.setLoading(1);
@@ -29,11 +41,11 @@ const QuizPopUp = () => {
         }
         if (pageNumber === 1) {
             if (pagesData.industry === "") {
-                setLabels({ industry: "Choose you industry first", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "" });
+                setLabels({ industry: "Choose you industry first", qualification: "", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: ""});
                 return;
             }
             if (pagesData.qualification === "") {
-                setLabels({ industry: "", qualification: "Please choose your qualification", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: "" });
+                setLabels({ industry: "", qualification: "Please choose your qualification", yearExp: "", placeExp: "", state: "", formalQualifications: "", firstName: "", lastName: "", contactNumber: "", email: "", questionsForUs: ""});
                 return
             }
             increase();
@@ -81,7 +93,26 @@ const QuizPopUp = () => {
                 return;
             }
             contextContainer.setLoading(0);
-            const response = await universalJSONPost(pagesData, "/quiz");
+            
+            const body:quizProp={industry: pagesData.industry, qualification:pagesData.qualification, yearExp:pagesData.yearExp, placeExp:pagesData.placeExp,state:pagesData.state, formalQualifications:pagesData.formalQualifications, firstName:pagesData.firstName, lastName:pagesData.lastName, contactNumber:pagesData.contactNumber,email:pagesData.email}
+
+            if(resume){
+                const {data,status}=await uploadFile(resume,edgestore);
+                if(status){
+                    body.resumeLocation=data;
+                }
+                else{
+                    contextContainer.setLoading(3);
+                    return;
+                }
+            }
+            
+
+            if(pagesData.qualificationText!=="") body.qualificationText=pagesData.qualificationText;
+            if(pagesData.questionsForUs!=="") body.questionsForUs=pagesData.questionsForUs;
+
+            const response = await universalJSONPost(body, "/quiz");
+            
             if (response?.ok) contextContainer.setLoading(2);
             else contextContainer.setLoading(3);
         }
@@ -97,7 +128,7 @@ const QuizPopUp = () => {
             <div className={`${!popUp && 'hidden'} fixed left-[-12px] right-[-12px] inset-0 bg-[rgba(0,0,0,.8)] z-99`} onClick={() => setPopUp(false)}> </div>
             <div className={`${!popUp && 'hidden'} fixed flex flex-col items-center top-1/4 left-1/3 right-1/3 p-10 px-20 bg-white rounded-xl border-[5px] border-grad-one z-999`}>
                 {contextContainer.loading === 0 ? <Spinner button={true}/> : contextContainer.loading === 2 ? <h1 className="text-green-500"> Sucesfully sent your data </h1> : contextContainer.loading === 3 ? <h1 className="text-red-500"> Error sending data </h1> : <>
-                    <QuizPopUpContent pageNumber={pageNumber} pagesData={pagesData} setPagesData={setPagesData} labels={labels} />
+                    <QuizPopUpContent pageNumber={pageNumber} pagesData={pagesData} setPagesData={setPagesData} labels={labels} resume={resume} setResume={setResume}/>
                     <div className="mt-5" />
 
                     <div className="flex gap-4 mt-5">

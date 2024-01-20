@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useContext } from "react";
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
 import { universalGet } from "../../../../../components/systemComponents/apiConnectors/system/GET";
 import { useQuery } from "react-query";
 
@@ -13,7 +13,7 @@ import ButtonDesign from "../../../../systemComponents/modules/buttonDesign";
 import PopUp from "../../../../systemComponents/modules/popUp";
 import Spinner from "../../../../systemComponents/modules/spinner";
 import { universalPatch } from "../../../../systemComponents/apiConnectors/system/PATCH";
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 
 
 const IeltsEditDisplay = () => {
@@ -71,9 +71,9 @@ const IeltsEditDisplay = () => {
             }
 
             if (pictureOne) {
-                const { status: pictureOneStatus } = await deleteImage(actualImage.imageOne, edgestore);
+                const { status: pictureOneStatus } = await deleteFile(actualImage.imageOne, edgestore);
                 if (pictureOneStatus) {
-                    const { data, status } = await uploadImage(pictureOne, edgestore);
+                    const { data, status } = await uploadFile(pictureOne, edgestore);
                     if (status) {
                         uploadData.dataOne = data;
                     }
@@ -89,9 +89,9 @@ const IeltsEditDisplay = () => {
             }
 
             if (pictureTwo) {
-                const { status: pictureTwoStatus } = await deleteImage(actualImage.imageTwo, edgestore);
+                const { status: pictureTwoStatus } = await deleteFile(actualImage.imageTwo, edgestore);
                 if (pictureTwoStatus) {
-                    const { data, status } = await uploadImage(pictureTwo, edgestore);
+                    const { data, status } = await uploadFile(pictureTwo, edgestore);
                     if (status) {
                         uploadData.dataTwo = data;
                     }

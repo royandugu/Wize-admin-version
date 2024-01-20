@@ -8,11 +8,11 @@ import { universalGet } from "../../../../systemComponents/apiConnectors/system/
 
 import dynamic from "next/dynamic";
 import context from "../../../../systemComponents/context/context";
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 
 import ImageUpload from "../../../../systemComponents/modules/imageUpload";
 import ButtonDesign from "../../../../systemComponents/modules/buttonDesign";
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
 import Spinner from "../../../../systemComponents/modules/spinner";
 import PopUp from "../../../../systemComponents/modules/popUp";
 
@@ -43,10 +43,10 @@ const StudentEditDisplay = () => {
         contextContainer.setLoading(0);
         try {
             if (file) {
-                const { status } = await deleteImage(originalImage, edgestore);
+                const { status } = await deleteFile(originalImage, edgestore);
                 console.log(status);
                 if (status) {
-                    const { data: imageData, status } = await uploadImage(file, edgestore);
+                    const { data: imageData, status } = await uploadFile(file, edgestore);
                     if (status) uploadLink = imageData;
                     else {
                         contextContainer.setLoading(3);

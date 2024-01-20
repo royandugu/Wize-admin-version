@@ -45,6 +45,8 @@ export type quizProp={
     lastName:string,
     contactNumber:string,
     email:string,
-    questionsForUs:string
+    questionsForUs?:string,
+    qualificationText?:String,
+    resumeLocation?:String
 }
 

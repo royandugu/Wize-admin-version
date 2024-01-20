@@ -15,9 +15,9 @@ import context from "../../../../systemComponents/context/context";
 import { universalGet } from "../../../../systemComponents/apiConnectors/system/GET";
 
 import 'react-quill/dist/quill.snow.css';
-import { uploadImage } from "../../../../systemComponents/microFunctions/uploadImage";
+import { uploadFile } from "../../../../systemComponents/microFunctions/uploadFile";
 import Spinner from "../../../../systemComponents/modules/spinner";
-import { deleteImage } from "../../../../systemComponents/microFunctions/deleteImage";
+import { deleteFile } from "../../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../../systemComponents/apiConnectors/system/PATCH";
 
 const VisitorEditDisplay = () => {
@@ -54,10 +54,10 @@ const VisitorEditDisplay = () => {
         try {
 
             if (fileOne) {
-                //const { status } = await deleteImage(originalImage.imageOne, edgestore);
+                //const { status } = await deleteFile(originalImage.imageOne, edgestore);
                 const status = true;
                 if (status) {
-                    const { data: imageData, status } = await uploadImage(fileOne, edgestore);
+                    const { data: imageData, status } = await uploadFile(fileOne, edgestore);
                     if (status) newFileUploads.firstImage = imageData;
                     else {
                         contextContainer.setLoading(3);
@@ -72,9 +72,9 @@ const VisitorEditDisplay = () => {
             }
 
             if (fileTwo) {
-                const { status } = await deleteImage(originalImage.imageTwo, edgestore);
+                const { status } = await deleteFile(originalImage.imageTwo, edgestore);
                 if (status) {
-                    const { data, status } = await uploadImage(fileTwo, edgestore);
+                    const { data, status } = await uploadFile(fileTwo, edgestore);
                     if (status) newFileUploads.secondImage = data;
                     else {
                         contextContainer.setLoading(3);
@@ -87,9 +87,9 @@ const VisitorEditDisplay = () => {
                 }
             }
             if (fileThree) {
-               const { status } = await deleteImage(originalImage.imageThree, edgestore);
+               const { status } = await deleteFile(originalImage.imageThree, edgestore);
                 if (status) {
-                    const { data, status } = await uploadImage(fileThree, edgestore);
+                    const { data, status } = await uploadFile(fileThree, edgestore);
                     if (status) newFileUploads.thirdImage = data;
                     else {
                         contextContainer.setLoading(3);
