@@ -11,7 +11,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="flex">
+          {children}
+          <div className="h-[screen]"></div>    
+        </div>
       </body>
     </html> 
   )
