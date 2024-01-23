@@ -125,11 +125,11 @@ const EducationEditDisplay = () => {
                 <ReactQuill value={futureAwaitsText} onChange={setFutureAwaitsText} theme="snow" className="h-[400px]" />
 
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update education page"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update education page"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit Education page"]} title="Education edit" body="Are you sure you want to edit the education page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The education page have been sucesfully edited" errorMessage="Error updating the education page" />
             </form>

@@ -210,12 +210,12 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                     <h1 className="mt-8"> Event details : </h1>
                     <ReactQuill theme="snow" className="h-[400px]" value={eventBody} onChange={setEventBody} />
                     <div className="mt-20 flex gap-5">
-                        <button onClick={(e) => {
+                        <div onClick={(e) => {
                             e.preventDefault();
                             //form validation
                             setShowPopUp(true)
-                        }}><ButtonDesign text={prop.updateId ? "Update event" : "Create event"} noArrow={true} /></button>
-                        <button onClick={discardForm}><ButtonDesign text="Discard event" noArrow={true} /></button>
+                        }}><ButtonDesign text={prop.updateId ? "Update event" : "Create event"} noArrow={true} /></div>
+                        <div onClick={discardForm}><ButtonDesign text="Discard event" noArrow={true} /></div>
                     </div>
 
                 </form>

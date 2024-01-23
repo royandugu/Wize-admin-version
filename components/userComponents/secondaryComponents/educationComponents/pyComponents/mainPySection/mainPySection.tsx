@@ -50,12 +50,12 @@ const MainPySection = ({ isAdmin, textSection, setTextSection, setPictureOne, se
                         <div className="mt-5" />
                         {isAdmin && (
                             <>
-                                <button onClick={() => setTextSection && setTextSection({ ...textSection, pointParas: [...textSection.pointParas, { point: "", para: "" }] })}><ButtonDesign text="Add points" noArrow={true} /></button>
-                                <button className="ml-5" onClick={() => {
+                                <div onClick={() => setTextSection && setTextSection({ ...textSection, pointParas: [...textSection.pointParas, { point: "", para: "" }] })}><ButtonDesign text="Add points" noArrow={true} /></div>
+                                <div className="ml-5" onClick={() => {
                                     const updatedpointParas = [...textSection.pointParas];
                                     updatedpointParas.pop(); // Removes the last section, you can adjust this based on your requirements
                                     setTextSection && setTextSection({ ...textSection, pointParas: updatedpointParas });
-                                }}><ButtonDesign text="Remove points" noArrow={true} /></button>
+                                }}><ButtonDesign text="Remove points" noArrow={true} /></div>
                             </>
                         )}
                     </ul>
@@ -90,13 +90,13 @@ const MainPySection = ({ isAdmin, textSection, setTextSection, setPictureOne, se
                         <div className="mt-5" />
                         {isAdmin &&
                             <>
-                                <button onClick={() => setTextSection && setTextSection({ ...textSection, pointParas2: [...textSection.pointParas2, { point: "", para: "" }] })}><ButtonDesign text="Add points" noArrow={true} /></button>
+                                <div onClick={() => setTextSection && setTextSection({ ...textSection, pointParas2: [...textSection.pointParas2, { point: "", para: "" }] })}><ButtonDesign text="Add points" noArrow={true} /></div>
 
-                                <button className="ml-5" onClick={() => {
+                                <div className="ml-5" onClick={() => {
                                     const updatedPointParas2 = [...textSection.pointParas2];
                                     updatedPointParas2.pop(); // Removes the last section, you can adjust this based on your requirements
                                     setTextSection && setTextSection({ ...textSection, pointParas2: updatedPointParas2 });
-                                }}><ButtonDesign text="Remove points" noArrow={true} /></button>
+                                }}><ButtonDesign text="Remove points" noArrow={true} /></div>
                             </>
                         }
                     </ul>

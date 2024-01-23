@@ -3,12 +3,14 @@
 import { useEffect } from "react";
 
 import Aos from "aos";
-import MenuDisplay from "../../userComponents/primaryComponents/menuComponents/menuDisplay";
 import Footer from "../../userComponents/primaryComponents/footerComponents/footer";
+import dynamic from "next/dynamic";
+
+const MenuDisplay = dynamic(() => import('../../userComponents/primaryComponents/menuComponents/menuDisplay'), { ssr: false })
 
 import "aos/dist/aos.css";
 
-const AosWrapper = ({
+const AosWrapper = ({ 
     children,
 }: {
     children: React.ReactNode;

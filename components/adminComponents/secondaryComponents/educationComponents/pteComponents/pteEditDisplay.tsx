@@ -158,8 +158,8 @@ const PteEditDisplay = () => {
             <>
                 <MainPteSection isAdmin={true} textSection={pteTextSection} setTextSection={setPteTextSection} pictureOne={pictureOne} pictureTwo={pictureTwo} setPictureOne={setPictureOne} setPictureTwo={setPictureTwo} imageOne={imageOne} setImageOne={setImageOne} imageTwo={imageTwo} setImageTwo={setImageTwo} />
                 <div className="flex gap-5 mt-5">
-                    <button onClick={() => setShowPopUp(true)}> <ButtonDesign text="Confirm changes" noArrow={true} /></button>
-                    <button> <ButtonDesign text="Discard changes" noArrow={true} /></button>
+                    <div onClick={() => setShowPopUp(true)}> <ButtonDesign text="Confirm changes" noArrow={true} /></div>
+                    <div> <ButtonDesign text="Discard changes" noArrow={true} /></div>
                 </div>
                 <PopUp title="PTE update" body={"Do you want to update the PTE page ?"} buttonTexts={["Update changes"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={[submitForm]} contextContainer={contextContainer} finalMessage={"The PTE page has been updated"} errorMessage={"Error updating the PTE page"} />
 

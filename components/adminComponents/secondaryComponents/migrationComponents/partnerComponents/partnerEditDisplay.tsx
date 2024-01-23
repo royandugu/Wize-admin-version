@@ -181,11 +181,11 @@ const PartnerEditDisplay = () => {
                 <ReactQuill value={workDependentText} onChange={setWorkDependentText} theme="snow" className="h-[400px]" />
 
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update migration/partner"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update migration/partner"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit Partner page"]} title="Partner edit" body="Are you sure you want to edit the partner page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The student page have been sucesfully edited" errorMessage="Error updating the partner page" />
 

@@ -22,24 +22,23 @@ const MenuDisplay = () => {
     const [dispNumberTwo,setDispNumberTwo]=useState<number>(0);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const handleResize = () => {
-                setShowDropDownOne(false);
-                setShowDropDownTwo(false);
-            };
+        const handleResize = () => {
+            setShowDropDownOne(false);
+            setShowDropDownTwo(false);
+        };
 
-            const handleScroll = () =>{
-                if(window.scrollY>=20) setMoveMenuUp(true);
-                else setMoveMenuUp(false);
-            }
-
-            window.addEventListener('resize', handleResize);
-            window.addEventListener('scroll', handleScroll);
-
-            return () => {
-                window.removeEventListener('resize', handleResize);
-            };
+        const handleScroll = () => {
+            if (window.scrollY >= 20) setMoveMenuUp(true);
+            else setMoveMenuUp(false);
         }
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+
     }, []); 
 
     return (

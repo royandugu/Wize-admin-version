@@ -181,12 +181,12 @@ const ChartOne: React.FC = () => {
 
       <div>
         <div id="chartOne" className="-ml-5">
-         {(typeof window !== 'undefined') &&<ReactApexChart
+          <ReactApexChart
             options={options}
             series={state.series}
             type="area"
             height={350}
-          />}
+          />
         </div>
       </div>
     </div>

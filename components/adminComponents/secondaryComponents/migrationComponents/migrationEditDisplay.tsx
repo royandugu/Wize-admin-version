@@ -130,11 +130,11 @@ const MigrationEditDisplay = () => {
                 <h1 className="mt-20 mb-2">  Disclaimer: </h1>
                 <ReactQuill value={disclaimer} onChange={setDisclaimer} theme="snow" className="h-[400px]" />
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update migration page"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update migration page"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit migration page"]} title="Migration edit" body="Are you sure you want to edit the migration page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The migration page have been sucesfully edited" errorMessage="Error updating the migration page" />
             </form>

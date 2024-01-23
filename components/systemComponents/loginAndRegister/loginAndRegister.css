@@ -1,15 +1,25 @@
+.loginAndRegisterForm{
+    width: 70%;
+}
 .loginAndRegisterForm input{
     height:50px;
     border:1px solid grey;
     margin-top:10px;
     padding-left:10px;
+    border-radius:5px;
+    width:100%;
+    outline: none;
 }
 .loginAndRegisterForm button{
-    background:black;
     color:white;
-    padding:20px;
+    padding:10px;
     margin-top:20px;
+    width:100%;
+    border-radius: 5px;
 }
+.loginAndRegisterForm button:hover{
+    background:rgb(10,10,10);
+} 
 .fileType>.currentImgBackground>.fileUpload--updateProfilePfp>.plusIcon{
     color:white;
     font-size:150px;

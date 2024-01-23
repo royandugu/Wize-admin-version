@@ -100,11 +100,11 @@ const ChartThree: React.FC = () => {
 
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
-          {(typeof window !== 'undefined')&& <ReactApexChart
+          <ReactApexChart
             options={options}
             series={state.series}
             type="donut"
-          />}
+          />
         </div>
       </div>
 

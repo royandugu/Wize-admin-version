@@ -109,11 +109,11 @@ const StudentEditDisplay = () => {
                 <h1 className="mt-20 mb-2"> Disclaimer : </h1>
                 <ReactQuill theme="snow" className="h-[400px]" value={disclaimer} onChange={setDisclaimer} />
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update migration/student"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update migration/student"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit student page"]} title="Student edit" body="Are you sure you want to edit the student page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The student page have been sucesfully edited" errorMessage="Error updating the student page"/>
             </form>

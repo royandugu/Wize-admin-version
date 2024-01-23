@@ -47,9 +47,9 @@ const PopUp = (props: PopUp) => {
                     <p> {props.body} </p>
                     <div className="flex gap-2 pt-5">
                         {props.buttonTexts.map((bt: string, id: number) => (
-                            <button key={id} onClick={props.functionLists[id]}>
+                            <div key={id} onClick={props.functionLists[id]}>
                                 <ButtonDesign noArrow={true} text={bt} />
-                            </button> 
+                            </div> 
                         ))}
                     </div>
                 </div>

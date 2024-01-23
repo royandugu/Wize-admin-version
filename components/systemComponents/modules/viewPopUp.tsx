@@ -42,9 +42,11 @@ const ViewPopUp = (props: ViewPopUpType) => {
                                     <p> {data.qualificationText} </p>
                                 </>}
                                 {data.resumeLocation && (
-                                    <a target="_blank" href={data.resumeLocation} rel="noopener noreferrer"><div className="h-[100px] w-[100px] border-[3px] rounded-md flex justify-center items-center p-5 mt-5 hover:bg-grad-one hover:text-white border-grad-one">
-                                        <h1> View resume </h1>
-                                    </div></a>
+                                    <a target="_blank" href={data.resumeLocation} rel="noopener noreferrer">
+                                        <span className="h-[100px] w-[100px] border-[3px] rounded-md flex justify-center items-center p-5 mt-5 hover:bg-grad-one hover:text-white border-grad-one">
+                                            <h1> View resume </h1>
+                                        </span>
+                                    </a>
                                 )}
                             </div>
                         )

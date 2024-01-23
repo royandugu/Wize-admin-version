@@ -28,7 +28,7 @@ export default async function RootLayout({
             await connectDB();
             return (
                 <html lang="en">
-                    <body className={inter.className} suppressHydrationWarning={false}>
+                    <body className={inter.className} suppressHydrationWarning={true}>
                         <Provider>
                             <ContextState>
                                 <EdgeStoreProvider>

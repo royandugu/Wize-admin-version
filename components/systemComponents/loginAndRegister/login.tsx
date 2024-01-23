@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { universalJSONPost } from "../apiConnectors/system/POST";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -23,27 +23,28 @@ const Login = (props: LoginProp) => {
 
     const router = useRouter();
 
-    const sendLoginRequest = async (e: any) => {
+    const sendLoginRequest = async (e: FormEvent) => {
         e.preventDefault();
-        const data = {
-            email: email,
-            password: password
-        }
-        const url = `${props.isAdmin ? '/admin/login' : '/login'}`
-
-        const res = await universalJSONPost(data, url);
-        if (res?.ok) router.push("/user/dashboard");
+        await signIn("credentials",{
+            email:email,
+            password:password,
+            redirect:true
+        })
     }
 
     if (session) return <h5> Signed in as</h5>
     else {
         return (
-            <form className="loginAndRegisterForm" onSubmit={(e) => sendLoginRequest(e)}>
-                <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} /><br />
-                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} /><br />
-                <button type="submit" onClick={() => signIn()}> Login </button>
-                <h1> Don't have an account? <Link href="/register" className="text-red-400"> Register </Link> </h1>
-            </form>
+            <>
+                <img src="/images/logo.png" className="w-[300px] mb-10"/>
+                <form className="loginAndRegisterForm" onSubmit={sendLoginRequest}>
+                    <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/><br />
+                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/><br />
+                    <button type="submit"> Login </button>
+                </form>
+                <h1 className="mt-5"> Don't have an account? <Link href="/register" className="text-red-400"> Register </Link> </h1>
+                
+            </>
         )
     }
 }

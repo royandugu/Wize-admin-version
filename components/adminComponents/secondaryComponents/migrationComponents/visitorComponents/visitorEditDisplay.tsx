@@ -163,11 +163,11 @@ const VisitorEditDisplay = () => {
                 <ReactQuill theme="snow" className="h-[400px]" value={ourServices} onChange={setOurServices} />
 
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update migration/Visitor"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update migration/Visitor"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit Visitor page"]} title="Visitor edit" body="Are you sure you want to edit the Visitor page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The Visitor page have been sucesfully edited" errorMessage="Error updating the Visitor page" />
 

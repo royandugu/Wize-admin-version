@@ -135,11 +135,11 @@ const TrEditDisplay = () => {
                 <ReactQuill theme="snow" className="h-[400px]" value={ourServices} onChange={setOurServices} />
                 
                 <div className="mt-20 flex gap-5">
-                    <button onClick={(e) => {
+                    <div onClick={(e) => {
                         e.preventDefault();
                         //form validation
                         setShowPopUp(true)
-                    }}><ButtonDesign text={"Update migration/TR"} noArrow={true} /></button>
+                    }}><ButtonDesign text={"Update migration/TR"} noArrow={true} /></div>
                 </div>
                 <PopUp showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Edit TR page"]} title="TR edit" body="Are you sure you want to edit the TR page" contextContainer={contextContainer} functionLists={[submitForm]} finalMessage="The TR page have been sucesfully edited" errorMessage="Error updating the TR page"/>
             </form>
