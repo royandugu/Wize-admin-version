@@ -14,7 +14,7 @@ type QuizPopUpType = {
 const SquareBox = ({ texts, images, setPagesData, pagesData, keyNumber }: { texts: Array<string>, images?: Array<string>, pagesData: quizProp, setPagesData: Dispatch<SetStateAction<quizProp>>, keyNumber: number }) => {
 
     return (
-        <div className={`flex ${texts.length > 4 && 'flex-wrap'} justify-center mt-5 gap-3`}>
+        <div className={`flex ${texts.length > 4 ? 'flex-wrap' : 'flex-wrap sm:flex-nowrap'} justify-center mt-5 gap-3`}>
             {texts.map((text, i) => (
                 <div key={i} className={`${(keyNumber === 0 && pagesData.yearExp === text) && 'bg-grad-one text-white'} ${(keyNumber === 1 && pagesData.placeExp === text) && 'bg-grad-one text-white'} ${(keyNumber === 2 && pagesData.state === text) && 'bg-grad-one text-white'} ${(keyNumber === 3 && pagesData.formalQualifications === text) && 'bg-grad-one text-white'} p-5 border-[3px] border-grad-one flex justify-center items-center cursor-pointer rounded-lg hover:bg-grad-one hover:text-white`} onClick={() => {
                     if (keyNumber === 0) setPagesData({ ...pagesData, yearExp: text });

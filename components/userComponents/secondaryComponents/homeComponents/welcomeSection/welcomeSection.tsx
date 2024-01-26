@@ -15,11 +15,10 @@ const WelcomePage = () => {
                         <img alt="students_small" src="/images/students_small.png" className="md:mt-[-25px] ml-10 hidden md:block smallImage"/>
                     </div>
                     <div className="md+162:col-span-7 col-span-12 xl+70:mt-20 mt-[9%] pr-20 pl-20 lg:pr-32 lg:pl-0 lg:text-left" data-aos="fade-right">
-                        <h1 className="text-grad-one uppercase xl+70:text-[25px] text-[15px]"> Welcome to wize </h1>
-                        <h1 className="uppercase text-[25px] xl+70:text-[45px] leading-3 mt-5"> Unlocking <span className="text-grad-one"> wisdom </span></h1>
-                        <h1 className="uppercase xl+70:text-[45px] text-[25px]"> Transforming&nbsp;<span className="text-grad-one">success </span></h1>
-                        <p className="uppercase xl+70:text-[13px] mb-5 hidden xl+70:block"> Discover a world of opportunities with our extensive database of prestigious universities and colleges from around the globe. Whether you are interested in pursuing a bachelor's degree, a master's program, or specialized courses, we've got you covered.</p>
-                        <p className="uppercase text-[13px] mb-5 xl+70:hidden mt-3"> Discover a world of opportunities with our extensive database of prestigious universities and colleges from around the globe. Whether you are interested in pursuing a bachelor's degree, a master's program, or specialized courses, we've got you covered.</p>
+                        <h1 className="text-grad-one uppercase text-[12px] sm:text-[15px] xl+70:text-[25px]"> Welcome to wize </h1>
+                        <h1 className="uppercase text-[15px] sm:text-[25px] xl+70:text-[45px] leading-3 mt-5"> Unlocking <span className="text-grad-one"> wisdom </span></h1>
+                        <h1 className="uppercase text-[20px] sm:text-[25px] xl+70:text-[45px]"> Transforming&nbsp;<span className="text-grad-one">success </span></h1>
+                        <p className="uppercase text-[13px] mt-3 mb-5"> Discover a world of opportunities with our extensive database of prestigious universities and colleges from around the globe. Whether you are interested in pursuing a bachelor's degree, a master's program, or specialized courses, we've got you covered.</p>
                         <div className="mb-10 md+162:mb-0">
                             <ButtonDesign text={"Learn more"} />
                         </div>
