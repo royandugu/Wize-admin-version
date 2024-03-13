@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { universalGet } from "../../../systemComponents/apiConnectors/system/GET";
 

@@ -17,8 +17,7 @@ const IndvEventSection=({id}:indvEventSectionProp)=>{
     else if(status === "error") return <h5> Error fetching event </h5>
     return(
         <>
-            <SecondaryTitleDesign changeBg={true} page={data.title} menu={true}/>
-            <MainIndvEventSection startDate={data.startDate} endDate={data.endDate} image={data.banner} body={data.body}/>
+            <MainIndvEventSection title={data.title} startDate={data.startDate} endDate={data.endDate} image={data.banner} body={data.body}/>
         </>
     )
 }
