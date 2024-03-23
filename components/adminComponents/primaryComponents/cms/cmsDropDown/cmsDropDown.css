@@ -1,0 +1,13 @@
+.cmsDropDown{
+    transition:.3s ease-in-out;
+    transform-origin: top;
+    position: absolute;
+    top:50px;
+    width:100%;
+    border:1px solid rgb(200,200,200);
+    left:0;
+    z-index: 9;
+}
+.closed{
+    transform:scaleY(0);
+}

@@ -50,3 +50,10 @@ export type quizProp={
     resumeLocation?:String
 }
 
+export type cmsType={
+    title?:string,
+    subtitle?:string,
+    image?:string,
+    description?:string
+}
+

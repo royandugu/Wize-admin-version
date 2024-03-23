@@ -31,7 +31,14 @@ Folder structuring
         For our own we can put things like lg+100, which means lg=1024 and lg+100=1124 which is our another breakpoint
 
 
-## API routes
 
+
+## To be done
+
+Backend ko CMS mah content add garna milne plus remove garna milne, tala mathi parna milne. Logic chain euta array mah content pathaune:
+Our schema would be something like [{title:'',subtitle:'',image}] like this. Now yeslai array kasari change garne vanda tyo component component 
+create garna milxa ra harek component ko side mah tesko position auxa. Ho yo position laii change garera apply garepaxi tyo position pani change
+hunxa. Now on the basis of that changed position hamro content tesari naii auxa front end mah ra tesari naii render garne. Ho yo massive changes
+haru implement hannu parxa.
  
  

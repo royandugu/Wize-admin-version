@@ -220,7 +220,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
 
                 </form>
                 <PopUp title="Event Publishment" body={prop.updateId ? "Do you want to update this event ?" :"Do you want to publish this event ?"} buttonTexts={prop.updateId?["Update event"]:["Publish event"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={prop.updateId?[updateForm]:[submitForm]} contextContainer={contextContainer} finalMessage={prop.updateId ?"Your event has been updated" :"Your event has been published"} errorMessage={prop.updateId?"Error updating the event":"Error publishing your event"} finalNavigation={"/admin/events/view"} />
-
+                        
             </>
         )
     }
