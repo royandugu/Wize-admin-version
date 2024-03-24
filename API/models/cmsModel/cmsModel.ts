@@ -6,8 +6,8 @@ const cmsSchema=new mongoose.Schema({
             title: String,
             subtitle: String,
             description: String,
-            images: String // Assuming image URLs are stored as strings
-        }
+            image: String 
+        } 
     ]
 },{timestamps:true})
 

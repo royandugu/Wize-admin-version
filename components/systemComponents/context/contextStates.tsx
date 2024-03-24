@@ -6,10 +6,13 @@ import Context from "./context";
 
 const ContextState=(props:any)=>{
     const [loading,setLoading]=useState(1);
+    const [message,setMessage]=useState("");
 
     const collection={
         loading:loading,
-        setLoading:setLoading
+        setLoading:setLoading,
+        message:message,
+        setMessage:setMessage
     }
 
     return(

@@ -53,7 +53,7 @@ export type quizProp={
 export type cmsType={
     title?:string,
     subtitle?:string,
-    image?:string,
+    image?:File | string,
     description?:string
 }
 

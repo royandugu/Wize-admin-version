@@ -7,14 +7,20 @@ import { useState, useEffect } from "react";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const SubtitleBox = ({ index, dataContents, setDataContents }: { index:number, dataContents:Array<cmsType>, setDataContents:Dispatch<SetStateAction<Array<cmsType>>>}) => {
-    const [value,setValue]=useState("Subtitle");
-    let arr=[...dataContents];
+const SubtitleBox = ({ index, dataContents, setDataContents }: { index: number, dataContents: Array<cmsType>, setDataContents: Dispatch<SetStateAction<Array<cmsType>>> }) => {
+    const [value, setValue] = useState<string | undefined>("Subtitle");
+    let arr = [...dataContents];
 
-    useEffect(()=>{
-        arr[index]={subtitle:value}
+    useEffect(() => {
+        if (dataContents[index] && dataContents[index].subtitle !== undefined) {
+            setValue(dataContents[index].subtitle);
+        }
+    }, []);
+
+    useEffect(() => {
+        arr[index] = { subtitle: value }
         setDataContents(arr);
-    },[value])
+    }, [value])
 
 
     return (
