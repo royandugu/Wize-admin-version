@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { StatusCodes } from "http-status-codes";
 import { updateData } from "../../../../../../../../API/controllers/controllers";
-import { ieltsModel } from "../../../../../../../../API/models/commonModel/commonModel";
+import { ieltsModel } from "../../../../../../../../API/models/cmsModel/cmsModel";
 export const dynamic = 'force-dynamic';
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{

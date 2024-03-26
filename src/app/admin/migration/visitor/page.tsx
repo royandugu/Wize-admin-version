@@ -1,6 +1,8 @@
-import VisitorEditDisplay from "../../../../../components/adminComponents/secondaryComponents/migrationComponents/visitorComponents/visitorEditDisplay";
+import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
-const Page=()=>{
-    return <VisitorEditDisplay/>
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/visitor" getLink="/visitor" fetchQueryName="cms-visitor-display"/>
+    )
 }
 export default Page;

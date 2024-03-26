@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { cmsType } from "../../../systemComponents/types/types";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { uploadFile } from "../../../systemComponents/microFunctions/uploadFile";
 import { universalGet } from "../../../systemComponents/apiConnectors/system/GET";
 import { useQuery } from "react-query";
+import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 
 import TitleBox from "./cmsBoxes/titleBox";
 import SubtitleBox from "./cmsBoxes/subtitleBox";
@@ -20,13 +21,14 @@ import CmsDropDown from "./cmsDropDown/cmsDropDown";
 import context from "../../../systemComponents/context/context";
 import PopUp from "../../../systemComponents/modules/popUp";
 import Spinner from "../../../systemComponents/modules/spinner";
+import InitialParagraphBox from "./cmsBoxes/initialParagrahBox";
 
 import 'react-quill/dist/quill.snow.css';
-import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 
 const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: string, getLink: string, fetchQueryName: string }) => {
     const [showDropDown, setShowDropDown] = useState(false);
     const [dataContents, setDataContents] = useState<Array<cmsType>>([]);
+    const [initialPara,setInitialPara]=useState<string>("");
     const [noTrimmerOne, setNoTrimmerOne] = useState(false);
     const [showPopUp, setShowPopUp] = useState(false);
     const [imageTrackRecord, setImageTrackRecord] = useState<Array<{ image: string, index: number }>>([]);
@@ -34,16 +36,21 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
     const contextContainer = useContext(context);
 
     const { data, status } = useQuery(fetchQueryName, () => universalGet(getLink));
+    
     const { edgestore } = useEdgeStore();
+
 
     useEffect(() => {
         if (status === "success") {
-            data.data.content.forEach((cnts: any, index: number) => {
+            
+            data.data.content.cms.forEach((cnts: any, index: number) => {
                 if (typeof cnts.image === 'string') setImageTrackRecord(prevContainer => [...prevContainer, { image: cnts.image, index: index }]);
             });
-            setDataContents(data.data.content);
+            setDataContents(data.data.content.cms);
+            setInitialPara(data.data.content.intialPara);
         }
     }, [status])
+
 
     const submitForm = async () => {
         let revert = false;
@@ -51,13 +58,13 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
 
         contextContainer.setLoading(0);
         try {
-            const promises = dataContents.map(async (cnts, index:number) => {
+            const promises = dataContents.map(async (cnts, index: number) => {
                 if (cnts.image && cnts.image instanceof File && typeof cnts === 'object') {
-                    
-                    if(imageTrackRecord.some(item => item.index === index)){
-                        const {status:imageDeleteStatus} = await deleteFile(imageTrackRecord[index].image, edgestore);
-                        if(!imageDeleteStatus){
-                            revert=true;
+
+                    if (imageTrackRecord.some(item => item.index === index)) {
+                        const { status: imageDeleteStatus } = await deleteFile(imageTrackRecord[index].image, edgestore);
+                        if (!imageDeleteStatus) {
+                            revert = true;
                             return;
                         }
                     }
@@ -116,11 +123,12 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
     }
 
     if (status === "loading") return <Spinner />
-    if (status === "success") {
-        return (
-            <>
+    if (status === "success") { 
+    return (
+        <>
+            <div className="fixed bg-white left-[17rem] right-0 pl-[2rem] z-1 pr-[3.27rem] pb-5 pt-20 shadow top-0">
                 <div className="flex items-center justify-between">
-                    <div className="relative w-1/6 top-0 ml-9 mb-5">
+                    <div className="relative w-1/6 top-0 ml-9">
                         <div onClick={(e) => {
                             e.preventDefault();
                             setShowDropDown(!showDropDown)
@@ -133,6 +141,11 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
                         <ButtonDesign2 text="Save" showNoIcon={true} />
                     </div>
                 </div>
+            </div>
+            <div className="pt-20">
+                <h5> Initial Paragraph : </h5>
+                <InitialParagraphBox dataContents={initialPara} setDataContents={setInitialPara} />
+                <h5> CMS contents : </h5>
                 {dataContents.map((cnts, indx: number) => (
                     <div className="flex relative gap-5 items-center" key={indx}>
                         <div className="flex gap-3 items-center">
@@ -141,10 +154,11 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
                                 <FaCaretDown className=" cursor-pointer opacity-30 hover:opacity-100" onClick={() => handleMoveDown(indx)} />
                             </div>
                         </div>
-                        {cnts.title!==undefined && <TitleBox placeholder="Enter the title" index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
-                        {cnts.subtitle!==undefined && <SubtitleBox index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
-                        {cnts.description!==undefined && <DescriptionBox index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
-                        {cnts.image!==undefined && (
+
+                        {cnts.title !== undefined && <TitleBox placeholder="Enter the title" index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
+                        {cnts.subtitle !== undefined && <SubtitleBox index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
+                        {cnts.description !== undefined && <DescriptionBox index={indx} dataContents={dataContents} setDataContents={setDataContents} />}
+                        {cnts.image !== undefined && (
                             <div className="mt-5 flex-1">
                                 <ImageUpload dataContents={dataContents} index={indx} setDataContents={setDataContents} fullWidth={true} noTrimmer={noTrimmerOne} setNoTrimmer={setNoTrimmerOne} />
                             </div>
@@ -154,9 +168,10 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
                         </div>
                     </div>
                 ))}
-                <PopUp title="Update pop-up" body={"Do you want to update the page ?"} buttonTexts={["Update changes"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={[submitForm]} contextContainer={contextContainer} finalMessage={"The page has been updated"} errorMessage={"Error updating the page"} />
-            </>
-        )
+            </div>
+            <PopUp title="Update pop-up" body={"Do you want to update the page ?"} buttonTexts={["Update changes"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={[submitForm]} contextContainer={contextContainer} finalMessage={"The page has been updated"} errorMessage={"Error updating the page"} />
+        </>
+    )
     }
 }
 export default CmsDisplay;

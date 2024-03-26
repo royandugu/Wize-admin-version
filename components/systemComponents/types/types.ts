@@ -51,6 +51,7 @@ export type quizProp={
 }
 
 export type cmsType={
+    initialPara?:string,
     title?:string,
     subtitle?:string,
     image?:File | string,

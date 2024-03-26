@@ -1,6 +1,8 @@
-import TrEditDisplay from "../../../../../components/adminComponents/secondaryComponents/migrationComponents/trComponents/trEditDisplay";
+import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
-const Page=()=>{
-    return <TrEditDisplay/>
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/tr" getLink="/tr" fetchQueryName="cms-tr-display"/>
+    )
 }
 export default Page;

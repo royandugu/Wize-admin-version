@@ -1,22 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
-import { updateData } from "../../../../../../../API/controllers/controllers";
-
-import cmsModel from "../../../../../../../API/models/cmsModel/cmsModel";
+import { ieltsModel } from "../../../../../../../API/models/cmsModel/cmsModel";
 
 export const dynamic = 'force-dynamic';
 
-export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
+export const POST=async (request:NextRequest):Promise<any>=>{
     try{
-        const {id}=params;
         const jsonReq=await request.json();
-        const response=await updateData(id,jsonReq,cmsModel);
+        const response=await createData(jsonReq,ieltsModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){
         return NextResponse.json({message:err.message},{status:StatusCodes.INTERNAL_SERVER_ERROR});
     }
 }
-
-

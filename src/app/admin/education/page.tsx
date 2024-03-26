@@ -1,6 +1,8 @@
-import EducationEditDisplay from "../../../../components/adminComponents/secondaryComponents/educationComponents/educationEditDisplay";
+import CmsDisplay from "../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
-const Page=()=>{
-    return <EducationEditDisplay/>
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/education" getLink="/education" fetchQueryName="cms-education-display"/>
+    )
 }
 export default Page;

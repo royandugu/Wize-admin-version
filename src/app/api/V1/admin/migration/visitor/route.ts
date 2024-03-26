@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { StatusCodes } from "http-status-codes";
 import { createData } from "../../../../../../../API/controllers/controllers";
+import { visitorModel } from "../../../../../../../API/models/cmsModel/cmsModel";
 
-import visitorModel from "../../../../../../../API/models/migration/visitorModel";
 export const dynamic = 'force-dynamic';
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{

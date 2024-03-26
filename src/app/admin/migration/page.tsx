@@ -1,6 +1,8 @@
-import MigrationEditDisplay from "../../../../components/adminComponents/secondaryComponents/migrationComponents/migrationEditDisplay";
-const Page=()=>{
-    return <MigrationEditDisplay/>
-}
+import CmsDisplay from "../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/migration" getLink="/migration" fetchQueryName="cms-migration-display"/>
+    )
+}
 export default Page;

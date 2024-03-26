@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createData } from "../../../../../../API/controllers/controllers";
+import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
-import { educationModel } from "../../../../../../API/models/cmsModel/cmsModel";
+import { pyModel } from "../../../../../../../API/models/cmsModel/cmsModel";
 
 export const dynamic = 'force-dynamic';
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createData(jsonReq,educationModel);
+        const response=await createData(jsonReq,pyModel);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

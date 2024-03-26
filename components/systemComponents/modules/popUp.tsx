@@ -26,7 +26,7 @@ const PopUp = (props: PopUp) => {
 
     return (
         <>
-            <div className={`fixed left-[-12px] right-[-12px] inset-0 bg-[rgba(0,0,0,.6)] ${!props.showPopUp && 'hidden'}`} onClick={() => {
+            <div className={`fixed left-[-12px] right-[-12px] z-9 inset-0 bg-[rgba(0,0,0,.6)] ${!props.showPopUp && 'hidden'}`} onClick={() => {
                 if(props.contextContainer.loading!==0) {
                     if(props.contextContainer.loading === 2 && props.finalNavigation) {
                         return router.push(props.finalNavigation);
@@ -38,7 +38,7 @@ const PopUp = (props: PopUp) => {
                 }
             }} />
             
-            <div className={`fixed top-[100px] left-1/2 bg-white border border-[rgb(200,200,200)] ${!props.showPopUp && 'hidden'}`}>
+            <div className={`fixed top-[100px] z-10 left-1/2 bg-white border border-[rgb(200,200,200)] ${!props.showPopUp && 'hidden'}`}>
                 <div className="flex justify-center items-center bg-[rgb(220,220,220)] p-2">
                     <h1 className="text-[20px]"> {props.title} </h1>
                 </div>

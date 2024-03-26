@@ -1,6 +1,8 @@
-import PteEditDisplay from "../../../../../components/adminComponents/secondaryComponents/educationComponents/pteComponents/pteEditDisplay";
+import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
-const Page=()=>{
-    return <PteEditDisplay/>
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/pte" getLink="/pte" fetchQueryName="cms-pte-display"/>
+    )
 }
 export default Page;

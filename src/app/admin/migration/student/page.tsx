@@ -1,6 +1,8 @@
-import StudentEditDisplay from "../../../../../components/adminComponents/secondaryComponents/migrationComponents/studentComponents/studentEditDisplay";
+import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
 
-const Page=()=>{
-    return <StudentEditDisplay/>
+const Page = () => {
+    return (
+        <CmsDisplay updateLink="/admin/student" getLink="/student" fetchQueryName="cms-student-display"/>
+    )
 }
-export default Page; 
+export default Page;

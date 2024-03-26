@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { updateData } from "../../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
-import { pteModel } from "../../../../../../../../API/models/commonModel/commonModel";
+import { pteModel } from "../../../../../../../../API/models/cmsModel/cmsModel";
 export const dynamic = 'force-dynamic';
 export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Promise<any>=>{
     try{
