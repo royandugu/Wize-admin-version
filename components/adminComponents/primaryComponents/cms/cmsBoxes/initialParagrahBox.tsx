@@ -6,17 +6,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const InitialParagraphBox = ({ dataContents, setDataContents }: { dataContents:string, setDataContents:Dispatch<SetStateAction<string>>}) => {
-    const [value,setValue]=useState<string | undefined>("initialPara");
+    const [value,setValue]=useState<string>(dataContents);
     
     useEffect(() => {
-        if (dataContents !== undefined) {
-            setValue(dataContents);
-        }
-    }, []);
-
-    useEffect(()=>{
-        if(value) setDataContents(value);
-    },[value])
+        setDataContents(value);
+    }, [value]);
 
     return (
         <div className="mt-5 mb-20 flex-1">

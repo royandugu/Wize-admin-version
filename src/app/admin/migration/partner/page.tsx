@@ -1,8 +1,10 @@
-import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
+import dynamic from "next/dynamic";
+
+const CmsDisplay = dynamic(() => import('../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay'), { ssr: false })
 
 const Page = () => {
     return (
-        <CmsDisplay updateLink="/admin/partner" getLink="/partner" fetchQueryName="cms-partner-display"/>
+        <CmsDisplay updateLink="/admin/migration/partner" getLink="/migration/partner" fetchQueryName="cms-partner-display"/>
     )
 }
 export default Page;

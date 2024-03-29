@@ -1,8 +1,10 @@
-import CmsDisplay from "../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay";
+import dynamic from "next/dynamic";
+
+const CmsDisplay = dynamic(() => import('../../../../../components/adminComponents/primaryComponents/cms/cmsDisplay'), { ssr: false })
 
 const Page = () => {
     return (
-        <CmsDisplay updateLink="/admin/ielts" getLink="/ielts" fetchQueryName="cms-ielts-display"/>
+        <CmsDisplay updateLink="/admin/education/ielts" getLink="/education/ielts" fetchQueryName="cms-ielts-display"/>
     )
 }
 export default Page;

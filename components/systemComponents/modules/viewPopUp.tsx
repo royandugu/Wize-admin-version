@@ -18,7 +18,6 @@ const ViewPopUp = (props: ViewPopUpType) => {
     const { data, status } = useQuery(['indv-query', props.id], () => universalIndvGet(`/admin/quiz`, props.id), {
         enabled: !!props.id,
     });
-    console.log(data);
 
     return (
             <>

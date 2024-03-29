@@ -39,6 +39,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
     
     const { edgestore } = useEdgeStore();
 
+    console.log(initialPara);
 
     useEffect(() => {
         if (status === "success") {
@@ -47,10 +48,8 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
                 if (typeof cnts.image === 'string') setImageTrackRecord(prevContainer => [...prevContainer, { image: cnts.image, index: index }]);
             });
             setDataContents(data.data.content.cms);
-            setInitialPara(data.data.content.intialPara);
         }
     }, [status])
-
 
     const submitForm = async () => {
         let revert = false;
@@ -83,9 +82,9 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
             await Promise.all(promises);
 
             if (!revert) {
-                const response = await universalPatch({ content: dataContents }, `${updateLink}/${data.data._id}`);
+                const body={initialPara:initialPara, cms:dataContents};
+                const response = await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
                 index++;
-                console.log(index);
                 if (response?.ok) contextContainer.setLoading(2);
                 else contextContainer.setLoading(3);
             } else {
@@ -144,7 +143,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
             </div>
             <div className="pt-20">
                 <h5> Initial Paragraph : </h5>
-                <InitialParagraphBox dataContents={initialPara} setDataContents={setInitialPara} />
+                <InitialParagraphBox dataContents={data.data.content.initialPara} setDataContents={setInitialPara} />
                 <h5> CMS contents : </h5>
                 {dataContents.map((cnts, indx: number) => (
                     <div className="flex relative gap-5 items-center" key={indx}>

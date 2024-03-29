@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const cmsSchema = new mongoose.Schema({
     content: {
-        intialPara:{
+        initialPara:{
             type:String,   
             required:[true, "Initial paragraph must be present"]
         },
@@ -14,7 +14,7 @@ const cmsSchema = new mongoose.Schema({
                 image: String
             }
         ]
-    }
+    } 
 }, { timestamps: true })
 
 export const educationModel = mongoose.models.educationModel || mongoose.model("educationModel", cmsSchema);
