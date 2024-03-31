@@ -1,6 +1,6 @@
-import EducationDisplay from "../../../../components/userComponents/secondaryComponents/educationComponents/educationDisplay";
+import CmsContentDisplay from "../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <EducationDisplay/>
+    return <CmsContentDisplay url="/education" fetchkey="education-contents" page="Education"/>
 }
 export default Page; 

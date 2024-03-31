@@ -1,7 +1,6 @@
-import TrDisplay from "../../../../../components/userComponents/secondaryComponents/migrationComponents/trComponents/trDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <TrDisplay/>
+    return <CmsContentDisplay url="/migration/tr" page="tr" fetchkey="tr-contents" noStudyAbroadForm={true}/>
 }
-
 export default Page;

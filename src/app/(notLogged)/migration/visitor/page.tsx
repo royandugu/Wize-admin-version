@@ -1,7 +1,6 @@
-import VisitorDisplay from "../../../../../components/userComponents/secondaryComponents/migrationComponents/visitorComponents/visitorDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <VisitorDisplay/>
+    return <CmsContentDisplay url="/migration/visitor" page="visitor" fetchkey="visitor-contents" noStudyAbroadForm={true}/>
 }
-
 export default Page;

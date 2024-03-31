@@ -89,4 +89,6 @@ const submitForm = async () => {
 ## Refactorings
 1. This description box, subtitle box and all these react quill boxes can be done in a single module as well, check which one is effective.
 2. The type cmsType has initialPara as optional in types but in database schema it is a must required
-3. Colleges ko API xaina
+3. Colleges ko API xaina 
+4. Global classes for h1, h5 and p 
+   

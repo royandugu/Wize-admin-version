@@ -1,6 +1,6 @@
-import PyDisplay from "../../../../../components/userComponents/secondaryComponents/educationComponents/pyComponents/pyDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <PyDisplay/>
+    return <CmsContentDisplay url="/education/py" fetchkey="py-contents" page="PY"/>
 }
-export default Page;
+export default Page; 

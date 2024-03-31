@@ -1,7 +1,6 @@
-import PartnerDisplay from "../../../../../components/userComponents/secondaryComponents/migrationComponents/partnerComponents/partnerDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <PartnerDisplay/>
+    return <CmsContentDisplay url="/migration/partner" page="partner" fetchkey="partner-contents" noStudyAbroadForm={true}/>
 }
-
 export default Page;

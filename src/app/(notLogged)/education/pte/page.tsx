@@ -1,6 +1,6 @@
-import PteDisplay from "../../../../../components/userComponents/secondaryComponents/educationComponents/pteComponents/pteDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <PteDisplay/>
+    return <CmsContentDisplay url="/education/pte" fetchkey="pte-contents" page="PTE"/>
 }
-export default Page;
+export default Page; 

@@ -1,6 +1,6 @@
-import StudentDisplay from "../../../../../components/userComponents/secondaryComponents/migrationComponents/studentComponens/studentDisplay";
+import CmsContentDisplay from "../../../../../components/userComponents/ternaryComponents/cmsContentDisplay/cmsContentDisplay";
 
 const Page=()=>{
-    return <StudentDisplay/>
+    return <CmsContentDisplay url="/migration" page="Migration" fetchkey="migration-contents" noStudyAbroadForm={true}/>
 }
 export default Page;
