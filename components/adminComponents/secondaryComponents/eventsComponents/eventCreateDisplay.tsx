@@ -1,9 +1,6 @@
 "use client"
 
 import ImageUpload from "../../../systemComponents/modules/imageUpload";
-import ButtonDesign from "../../../systemComponents/modules/buttonDesign";
-
-import dynamic from "next/dynamic";
 import context from "../../../systemComponents/context/context";
 import Spinner from "../../../systemComponents/modules/spinner";
 
@@ -14,8 +11,6 @@ import { uploadFile } from "../../../systemComponents/microFunctions/uploadFile"
 import { EventType } from "../../../systemComponents/types/types";
 import { useQuery } from "react-query";
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
-
 import 'react-quill/dist/quill.snow.css';
 import { universalJSONPost } from "../../../systemComponents/apiConnectors/system/POST";
 import { universalIndvGet } from "../../../systemComponents/apiConnectors/system/GET";
@@ -23,6 +18,8 @@ import { universalIndvGet } from "../../../systemComponents/apiConnectors/system
 import PopUp from "../../../systemComponents/modules/popUp";
 import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../systemComponents/apiConnectors/system/PATCH";
+
+import CmsDisplay from "../../primaryComponents/cms/cmsDisplay";
 
 type EventCreateDisplay = {
     updateId?: string
@@ -33,6 +30,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
     const [file, setFile] = useState<File | undefined>();
     const [showPopUp, setShowPopUp] = useState(false);
     const [image,setImage]=useState("");
+    const [title,setTitle]=useState("");
     const [noTrimmer,setNoTrimmer]=useState(true);
     const [prevImage,setPrevImage]=useState("");
     const [formBody, setFormBody] = useState<EventType>({
@@ -192,7 +190,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         return (
             <>
                 <form>
-                    <input type="text" value={formBody.title} placeholder="Event title" className="p-2 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setFormBody({ ...formBody, title: e.target.value })} />
+                    <input type="text" value={title} placeholder="Event title" className="p-2 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setTitle(e.target.value)} />
                     <div className="grid grid-cols-2 grid-rows-1 gap-2">
                         <div>
                             <div className="mt-8"> Start date & time (24-hr-format)</div>
@@ -205,19 +203,13 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                         <div className="flex gap-5"> <input type="date" value={dateTimeCombo.startDate} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, startDate: e.target.value })} /> <input type="time" value={dateTimeCombo.startTime} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, startTime: e.target.value })} /></div>
                         <div className="flex gap-5"> <input type="date" value={dateTimeCombo.endDate} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endDate: e.target.value })} /> <input type="time" value={dateTimeCombo.endTime} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endTime: e.target.value })} /></div>
                     </div>
-                    <h1 className="mt-8 mb-2"> Event banner : </h1>
+                    <h1 className="mt-8"> Event banner : </h1>
                     <ImageUpload setFile={setFile} fullWidth={true} image={image} setImage={setImage} noTrimmer={noTrimmer} setNoTrimmer={setNoTrimmer}/>
-                    <h1 className="mt-8"> Event details : </h1>
-                    <ReactQuill theme="snow" className="h-[400px]" value={eventBody} onChange={setEventBody} />
-                    <div className="mt-20 flex gap-5">
-                        <div onClick={(e) => {
-                            e.preventDefault();
-                            //form validation
-                            setShowPopUp(true)
-                        }}><ButtonDesign text={prop.updateId ? "Update event" : "Create event"} noArrow={true} /></div>
-                        <div onClick={discardForm}><ButtonDesign text="Discard event" noArrow={true} /></div>
-                    </div>
-
+                    <CmsDisplay fetchQueryName="some" updateLink="some" getLink="some" eventCreate={true} extra={{
+                        dateTimeCombo,
+                        file,
+                        title
+                    }}/>
                 </form>
                 <PopUp title="Event Publishment" body={prop.updateId ? "Do you want to update this event ?" :"Do you want to publish this event ?"} buttonTexts={prop.updateId?["Update event"]:["Publish event"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={prop.updateId?[updateForm]:[submitForm]} contextContainer={contextContainer} finalMessage={prop.updateId ?"Your event has been updated" :"Your event has been published"} errorMessage={prop.updateId?"Error updating the event":"Error publishing your event"} finalNavigation={"/admin/events/view"} />
                         

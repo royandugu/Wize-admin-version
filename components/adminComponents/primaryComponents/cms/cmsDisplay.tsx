@@ -23,9 +23,19 @@ import PopUp from "../../../systemComponents/modules/popUp";
 import Spinner from "../../../systemComponents/modules/spinner";
 import InitialParagraphBox from "./cmsBoxes/initialParagrahBox";
 
-import 'react-quill/dist/quill.snow.css';
+/* 
 
-const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: string, getLink: string, fetchQueryName: string }) => {
+  test cases 
+
+    event create garda image delete nahune
+    ra aru haru mah image delete hune 
+
+*/
+
+import 'react-quill/dist/quill.snow.css';
+import { universalJSONPost } from "../../../systemComponents/apiConnectors/system/POST";
+
+const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra }: { updateLink: string, getLink: string, fetchQueryName: string, eventCreate?:boolean, extra?:object }) => {
     const [showDropDown, setShowDropDown] = useState(false);
     const [dataContents, setDataContents] = useState<Array<cmsType>>([]);
     const [initialPara,setInitialPara]=useState<string>("");
@@ -35,12 +45,12 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
 
     const contextContainer = useContext(context);
 
-    const { data, status } = useQuery(fetchQueryName, () => universalGet(getLink));
+    const { data, status } = useQuery(fetchQueryName, () => universalGet(getLink),{enabled:!eventCreate});
     
     const { edgestore } = useEdgeStore();
 
-    console.log(initialPara);
-
+    console.log(extra);
+    
     useEffect(() => {
         if (status === "success") {
             
@@ -60,7 +70,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
             const promises = dataContents.map(async (cnts, index: number) => {
                 if (cnts.image && cnts.image instanceof File && typeof cnts === 'object') {
 
-                    if (imageTrackRecord.some(item => item.index === index)) {
+                    if (!eventCreate && imageTrackRecord.some(item => item.index === index)) {
                         const { status: imageDeleteStatus } = await deleteFile(imageTrackRecord[index].image, edgestore);
                         if (!imageDeleteStatus) {
                             revert = true;
@@ -83,7 +93,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
 
             if (!revert) {
                 const body={initialPara:initialPara, cms:dataContents};
-                const response = await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
+                const response = eventCreate ? await universalJSONPost({content:body},updateLink) :await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
                 index++;
                 if (response?.ok) contextContainer.setLoading(2);
                 else contextContainer.setLoading(3);
@@ -122,7 +132,8 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
     }
 
     if (status === "loading") return <Spinner />
-    if (status === "success") { 
+    else if (status === "error") return <h5> Error fetching data </h5>
+    else if (status === "success" || eventCreate) { 
     return (
         <>
             <div className="fixed bg-white left-[17rem] right-0 pl-[2rem] z-1 pr-[3.27rem] pb-5 pt-20 shadow top-0">
@@ -141,9 +152,10 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName }: { updateLink: strin
                     </div>
                 </div>
             </div>
-            <div className="pt-20">
+            <div className={`${eventCreate? 'pt-10' : 'pt-20'}`}>
+                {!eventCreate  &&(<>
                 <h5> Initial Paragraph : </h5>
-                <InitialParagraphBox dataContents={data.data.content.initialPara} setDataContents={setInitialPara} />
+                <InitialParagraphBox dataContents={data ? data.data.content.initialPara : " "} setDataContents={setInitialPara} /></>)}
                 <h5> CMS contents : </h5>
                 {dataContents.map((cnts, indx: number) => (
                     <div className="flex relative gap-5 items-center" key={indx}>

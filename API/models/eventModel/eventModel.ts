@@ -17,10 +17,14 @@ const eventSchema=new mongoose.Schema({
     banner:{
         type:String
     },
-    body:{
-        type:String,
-        required:[true, "Event body cannot be empty"]
-    }
+    cms: [
+        {
+            title: String,
+            subtitle: String,
+            description: String,
+            image: String
+        }
+    ]
 },{timestamps:true})
 
 const eventModel=mongoose.models.event || mongoose.model("event",eventSchema); 
