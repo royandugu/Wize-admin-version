@@ -3,8 +3,6 @@ import { FaLocationDot } from "react-icons/fa6";
 
 import parse from "html-react-parser";
 
-import "../../migrationComponents/migration.css";
-
 type mainIndvEventSectionProps = {
     image: string,
     body: string,

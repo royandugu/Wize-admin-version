@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useState, useEffect } from "react";
-import { cmsType } from "../../../systemComponents/types/types";
+import { EventType, cmsType } from "../../../systemComponents/types/types";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
@@ -35,7 +35,8 @@ import InitialParagraphBox from "./cmsBoxes/initialParagrahBox";
 import 'react-quill/dist/quill.snow.css';
 import { universalJSONPost } from "../../../systemComponents/apiConnectors/system/POST";
 
-const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra }: { updateLink: string, getLink: string, fetchQueryName: string, eventCreate?:boolean, extra?:object }) => {
+
+const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, createLink }: { updateLink: string, getLink: string, fetchQueryName: string, eventCreate?:boolean, extra?:any, createLink?:string }) => {
     const [showDropDown, setShowDropDown] = useState(false);
     const [dataContents, setDataContents] = useState<Array<cmsType>>([]);
     const [initialPara,setInitialPara]=useState<string>("");
@@ -64,9 +65,28 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra }:
     const submitForm = async () => {
         let revert = false;
         let index = 0;
+        const body:any={};
 
         contextContainer.setLoading(0);
         try {
+            if(extra){
+                if(extra.file){
+                    const { data: eventBannerData, status: eventBannerUploadStatus } = await uploadFile(extra.file, edgestore);
+                    if(eventBannerUploadStatus){
+                        body.title=extra.title;
+                        body.banner=eventBannerData;
+                        body.startDate= new Date(extra.dateTimeCombo.startDate + ' ' + extra.dateTimeCombo.startTime);
+                        body.endDate= new Date(extra.dateTimeCombo.endDate + ' ' + extra.dateTimeCombo.endTime);
+                    } 
+                    else{
+                        contextContainer.setLoading(3);
+                        return;
+                    }  
+                    
+                }
+            }
+
+            console.log(dataContents);
             const promises = dataContents.map(async (cnts, index: number) => {
                 if (cnts.image && cnts.image instanceof File && typeof cnts === 'object') {
 
@@ -92,8 +112,10 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra }:
             await Promise.all(promises);
 
             if (!revert) {
-                const body={initialPara:initialPara, cms:dataContents};
-                const response = eventCreate ? await universalJSONPost({content:body},updateLink) :await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
+                
+                body.initialPara=initialPara;
+                body.cms=dataContents;
+                const response = (eventCreate && createLink) ? await universalJSONPost({content:body},createLink) :await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
                 index++;
                 if (response?.ok) contextContainer.setLoading(2);
                 else contextContainer.setLoading(3);

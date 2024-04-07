@@ -2,7 +2,8 @@ import CmsDisplay from "../../../../../components/adminComponents/primaryCompone
 
 const Page = () => {
     return (
-        <CmsDisplay updateLink="/admin/colleges" getLink="/colleges" fetchQueryName="cms-colleges-display"/>
+        <></>
+        //<CmsDisplay updateLink="/admin/colleges" getLink="/colleges" fetchQueryName="cms-colleges-display"/>
     )
 }
 export default Page;

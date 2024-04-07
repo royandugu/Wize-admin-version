@@ -25,10 +25,10 @@ type EventCreateDisplay = {
     updateId?: string
 }
 
+
 const EventCreateDisplay = (prop: EventCreateDisplay) => {
     const [eventBody, setEventBody] = useState("");
     const [file, setFile] = useState<File | undefined>();
-    const [showPopUp, setShowPopUp] = useState(false);
     const [image,setImage]=useState("");
     const [title,setTitle]=useState("");
     const [noTrimmer,setNoTrimmer]=useState(true);
@@ -41,10 +41,10 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         body: ""
     })
     const [dateTimeCombo, setDateTimeCombo] = useState({
-        startDate: "",
-        startTime: "",
-        endDate: "",
-        endTime: ""
+        startDate: " ",
+        startTime: " ",
+        endDate: " ",
+        endTime: " "
     })
     const [dateTimeLabel, setDateTitleLabel]=useState({
         startLabel: "",
@@ -81,29 +81,6 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         return response;
     }
 
-    const submitForm = async (e: any) => {
-        e.preventDefault();
-        contextContainer.setLoading(0);
-        try {
-            const { data, status } = await uploadFile(file, edgestore);
-            if (status) {
-                const response=await commonSubmitter(universalJSONPost,"/admin/events",data);
-                if (response) {
-                    if (response.ok) {
-                        contextContainer.setLoading(2);
-                        discardForm(e);
-                    }
-                    else contextContainer.setLoading(3);
-                }
-            }
-            else if (status === false) {
-                contextContainer.setLoading(3);
-            }
-        }
-        catch (err) {
-            contextContainer.setLoading(3);
-        }
-    }
 
     const updateForm = async (e: any) => {
         e.preventDefault();
@@ -189,7 +166,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
     else {
         return (
             <>
-                <form>
+                <form className="mt-20">
                     <input type="text" value={title} placeholder="Event title" className="p-2 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setTitle(e.target.value)} />
                     <div className="grid grid-cols-2 grid-rows-1 gap-2">
                         <div>
@@ -205,14 +182,12 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                     </div>
                     <h1 className="mt-8"> Event banner : </h1>
                     <ImageUpload setFile={setFile} fullWidth={true} image={image} setImage={setImage} noTrimmer={noTrimmer} setNoTrimmer={setNoTrimmer}/>
-                    <CmsDisplay fetchQueryName="some" updateLink="some" getLink="some" eventCreate={true} extra={{
+                    <CmsDisplay fetchQueryName="some" updateLink="some" getLink="some" createLink="/admin/events" eventCreate={true} extra={{
                         dateTimeCombo,
                         file,
                         title
                     }}/>
-                </form>
-                <PopUp title="Event Publishment" body={prop.updateId ? "Do you want to update this event ?" :"Do you want to publish this event ?"} buttonTexts={prop.updateId?["Update event"]:["Publish event"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={prop.updateId?[updateForm]:[submitForm]} contextContainer={contextContainer} finalMessage={prop.updateId ?"Your event has been updated" :"Your event has been published"} errorMessage={prop.updateId?"Error updating the event":"Error publishing your event"} finalNavigation={"/admin/events/view"} />
-                        
+                </form>        
             </>
         )
     }
