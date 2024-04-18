@@ -15,6 +15,10 @@ const eventSchema = new mongoose.Schema({
             type: Date,
             required: [true, "End date of the event must be present"]
         },
+        googleFormUrl:{
+            type: String,
+            required:[true,"Google form url must be present"]
+        },
         banner: {
             type: String
         },

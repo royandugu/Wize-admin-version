@@ -12,10 +12,8 @@ import { EventType } from "../../../systemComponents/types/types";
 import { useQuery } from "react-query";
 
 import 'react-quill/dist/quill.snow.css';
-import { universalJSONPost } from "../../../systemComponents/apiConnectors/system/POST";
 import { universalIndvGet } from "../../../systemComponents/apiConnectors/system/GET";
 
-import PopUp from "../../../systemComponents/modules/popUp";
 import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { universalPatch } from "../../../systemComponents/apiConnectors/system/PATCH";
 
@@ -31,6 +29,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
     const [file, setFile] = useState<File | undefined>();
     const [image,setImage]=useState("");
     const [title,setTitle]=useState("");
+    const [googleFormUrl,setGoogleFormUrl]=useState("");
     const [noTrimmer,setNoTrimmer]=useState(true);
     const [prevImage,setPrevImage]=useState("");
     const [formBody, setFormBody] = useState<EventType>({
@@ -46,19 +45,30 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         endDate: " ",
         endTime: " "
     })
-    const [dateTimeLabel, setDateTitleLabel]=useState({
-        startLabel: "",
-        endLabel: ""
-    
-    })
 
     const { data, status, refetch } = useQuery(['indv-query', prop.updateId], () => universalIndvGet("/events", prop.updateId), {
         enabled: !!prop.updateId, 
     });
 
-    const { edgestore } = useEdgeStore();
+    console.log(data);
 
+    const { edgestore } = useEdgeStore();
+ 
     const contextContainer = useContext(context);
+
+    useEffect(()=>{
+        if(prop.updateId && status === "success"){
+            setTitle(data.content.title);
+            setGoogleFormUrl(data.content.googleFormUrl);
+            setDateTimeCombo({
+                startDate:data.content.startDate.split('T')[0],
+                startTime:data.content.startDate.split('T')[1].split('.')[0],
+                endDate:data.content.endDate.split('T')[0],
+                endTime:data.content.endDate.split('T')[1].split('.')[0]
+            })
+            setImage(data.content.banner);
+        }
+    },[prop.updateId, status])
 
     useEffect(() => {
         contextContainer.setLoading(1);
@@ -138,28 +148,6 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
         })
     }
 
-    useEffect(()=>{
-        if(status==="success" && prop.updateId){
-            formBody.title=data.title;
-            setImage(data.banner);
-            setEventBody(data.body);
-            setPrevImage(data.banner);
-
-            const formattedStartDate = new Date(data.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
-
-            const formattedEndDate = new Date(data.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});
-
-            setDateTimeCombo(
-                {...dateTimeCombo,
-                    startDate:formattedStartDate.split(",")[0],
-                    startTime:formattedStartDate.split(",")[1],
-                    endDate:formattedEndDate.split(",")[0], 
-                    endTime:formattedEndDate.split(",")[1]
-                }
-            )
-            setDateTitleLabel({startLabel:formattedStartDate, endLabel:formattedEndDate})
-        }
-    },[status])
 
     if (status === "loading") return <Spinner />
     else if (status === "error") return <h5> Error while fetching </h5>
@@ -169,20 +157,16 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                 <form className="mt-20">
                     <input type="text" value={title} placeholder="Event title" className="p-2 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setTitle(e.target.value)} />
                     <div className="grid grid-cols-2 grid-rows-1 gap-2">
-                        <div>
-                            <div className="mt-8"> Start date & time (24-hr-format)</div>
-                            {dateTimeLabel.startLabel.length > 0 && <h1 className="text-green-500"> Initially set as {dateTimeLabel.startLabel} </h1>}
-                        </div>
-                        <div>
-                            <div className="mt-8">End date & time (24-hr-format)</div>
-                            {dateTimeLabel.endLabel.length > 0 && <h1 className="text-green-500"> Initially set as {dateTimeLabel.endLabel} </h1>}
-                        </div>
+                        <div className="mt-8"> Start date & time</div>
+                        <div className="mt-8">End date & time</div>    
                         <div className="flex gap-5"> <input type="date" value={dateTimeCombo.startDate} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, startDate: e.target.value })} /> <input type="time" value={dateTimeCombo.startTime} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, startTime: e.target.value })} /></div>
                         <div className="flex gap-5"> <input type="date" value={dateTimeCombo.endDate} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endDate: e.target.value })} /> <input type="time" value={dateTimeCombo.endTime} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endTime: e.target.value })} /></div>
                     </div>
+                    <input type="text" value={googleFormUrl} placeholder="Google form url" className="p-2 mt-10 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setGoogleFormUrl(e.target.value)} />
+                    
                     <h1 className="mt-8"> Event banner : </h1>
                     <ImageUpload setFile={setFile} fullWidth={true} image={image} setImage={setImage} noTrimmer={noTrimmer} setNoTrimmer={setNoTrimmer}/>
-                    <CmsDisplay fetchQueryName="some" updateLink="some" getLink="some" createLink="/admin/events" eventCreate={true} extra={{
+                    <CmsDisplay fetchQueryName="some" updateLink="some" getLink={`/events/${prop.updateId}`} createLink="/admin/events" eventCreate={true} extra={{
                         dateTimeCombo,
                         file,
                         title

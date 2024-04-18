@@ -30,6 +30,10 @@ import InitialParagraphBox from "./cmsBoxes/initialParagrahBox";
     event create garda image delete nahune
     ra aru haru mah image delete hune 
 
+
+    NOTE :: 
+    Baru GET URL correct pathayera setTitle setBanner haru sabai yei cmsDisplay mah pathayera, baru fetching yesmai garne. 
+
 */
 
 import 'react-quill/dist/quill.snow.css';
@@ -37,6 +41,7 @@ import { universalJSONPost } from "../../../systemComponents/apiConnectors/syste
 
 
 const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, createLink }: { updateLink: string, getLink: string, fetchQueryName: string, eventCreate?:boolean, extra?:any, createLink?:string }) => {
+
     const [showDropDown, setShowDropDown] = useState(false);
     const [dataContents, setDataContents] = useState<Array<cmsType>>([]);
     const [initialPara,setInitialPara]=useState<string>("");
@@ -50,11 +55,12 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
     
     const { edgestore } = useEdgeStore();
 
-    console.log(extra);
+    console.log(data);
     
+
     useEffect(() => {
         if (status === "success") {
-            
+            console.log(data);
             data.data.content.cms.forEach((cnts: any, index: number) => {
                 if (typeof cnts.image === 'string') setImageTrackRecord(prevContainer => [...prevContainer, { image: cnts.image, index: index }]);
             });
@@ -86,7 +92,6 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                 }
             }
 
-            console.log(dataContents);
             const promises = dataContents.map(async (cnts, index: number) => {
                 if (cnts.image && cnts.image instanceof File && typeof cnts === 'object') {
 
@@ -202,7 +207,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                     </div>
                 ))}
             </div>
-            <PopUp title="Update pop-up" body={"Do you want to update the page ?"} buttonTexts={["Update changes"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={[submitForm]} contextContainer={contextContainer} finalMessage={"The page has been updated"} errorMessage={"Error updating the page"} />
+            <PopUp title="Create/Update pop-up" body={"Do you want to create/update the changes ?"} buttonTexts={["Create/Update changes"]} showPopUp={showPopUp} setShowPopUp={setShowPopUp} functionLists={[submitForm]} contextContainer={contextContainer} finalMessage={"The page has been created/updated"} errorMessage={"Error creating/updating the page"} />
         </>
     )
     }
