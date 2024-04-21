@@ -2,11 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 
 export type EventType = {
     _id?:string;
-    title: string;
-    startDate: Date;
-    endDate: Date;
-    banner: string;
-    body: string;
+    content: {
+        title: string;
+        startDate: Date;
+        endDate: Date;
+        banner: string;
+        body: string;
+    }
 }
 
 export type defaultApiResponse={

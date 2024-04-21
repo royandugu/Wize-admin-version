@@ -71,23 +71,24 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
 
     const { edgestore } = useEdgeStore();
 
+    console.log(data);
     useEffect(() => {
         if (status === "success") {
 
-            extra?.setTitle(data.content.title);
-            extra?.setGoogleFormUrl(data.content.googleFormUrl);
+            extra?.setTitle(data.data.content.title);
+            extra?.setGoogleFormUrl(data.data.content.googleFormUrl);
             extra?.setDateTimeCombo({
-                startDate: data.content.startDate.split('T')[0],
-                startTime: data.content.startDate.split('T')[1].split('.')[0],
-                endDate: data.content.endDate.split('T')[0],
-                endTime: data.content.endDate.split('T')[1].split('.')[0]
+                startDate: data.data.content.startDate.split('T')[0],
+                startTime: data.data.content.startDate.split('T')[1].split('.')[0],
+                endDate: data.data.content.endDate.split('T')[0],
+                endTime: data.data.content.endDate.split('T')[1].split('.')[0]
             })
-            extra?.setImage(data.content.banner);
+            extra?.setImage(data.data.content.banner);
 
-            data.content.cms.forEach((cnts: any, index: number) => {
+            data.data.content.cms.forEach((cnts: any, index: number) => {
                 if (typeof cnts.image === 'string') setImageTrackRecord(prevContainer => [...prevContainer, { image: cnts.image, index: index }]);
             });
-            setDataContents(data.content.cms);
+            setDataContents(data.data.content.cms);
         }
     }, [status])
 
@@ -144,7 +145,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
             if (!revert) {
                 if (!noInitialPara) body.initialPara = initialPara;
                 body.cms = dataContents;
-                const response = (eventCreate && createLink) ? await universalJSONPost({ content: body }, createLink) : await universalPatch({ content: body }, `${updateLink}/${data._id}`);
+                const response = (eventCreate && createLink) ? await universalJSONPost({ content: body }, createLink) : await universalPatch({ content: body }, `${updateLink}/${data.data._id}`);
                 index++;
                 if (response?.ok) contextContainer.setLoading(2);
                 else contextContainer.setLoading(3);
@@ -207,7 +208,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                 <div className={`${eventCreate ? 'pt-10' : 'pt-20'}`}>
                     {!eventCreate && !noInitialPara && (<>
                         <h5> Initial Paragraph : </h5>
-                        <InitialParagraphBox dataContents={data?.content.initialPara} setDataContents={setInitialPara} /> </>)}
+                        <InitialParagraphBox dataContents={data?.data?.content.initialPara} setDataContents={setInitialPara} /> </>)}
                     <h5> CMS contents : </h5>
                     {dataContents.map((cnts, indx: number) => (
                         <div className="flex relative gap-5 items-center" key={indx}>

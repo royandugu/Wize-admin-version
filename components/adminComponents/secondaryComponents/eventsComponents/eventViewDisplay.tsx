@@ -16,14 +16,17 @@ import context from "../../../systemComponents/context/context";
 const EventViewDisplay = () => {
     const [showPopUp,setShowPopUp]=useState(false);
     
-    const [selectedEventInfo,setSelectedEventInfo]=useState<EventType>({
-        _id:"",
-        title: "",
-        startDate: new Date(),
-        endDate: new Date(),
-        banner: "",
-        body: ""
-    });
+    const [selectedEventInfo, setSelectedEventInfo] = useState<EventType>(
+        {
+            _id: "",
+            content: {
+                title: "",
+                startDate: new Date(),
+                endDate: new Date(),
+                banner: "",
+                body: ""
+            }
+        });
 
     const queryClient=useQueryClient();
 
@@ -42,13 +45,16 @@ const EventViewDisplay = () => {
     const deleteEvent=async (e:any)=>{
         e.preventDefault();
         contextContainer.setLoading(0);
+        console.log(selectedEventInfo);
         try{
-            const {status}=await deleteFile(selectedEventInfo.banner,edgestore);
-            if(status && selectedEventInfo._id){
-                const res=await universalDelete("/admin/events",selectedEventInfo._id);
-                if(res.ok) {
-                    contextContainer.setLoading(2);
-                    queryClient.invalidateQueries("all-events")
+            if (selectedEventInfo.content.banner) {
+                const { status } = await deleteFile(selectedEventInfo.content.banner, edgestore);
+                if (status && selectedEventInfo._id) {
+                    const res = await universalDelete("/admin/events", selectedEventInfo._id);
+                    if (res.ok) {
+                        contextContainer.setLoading(2);
+                        queryClient.invalidateQueries("all-events")
+                    }
                 }
             }
             else contextContainer.setLoading(3);         
@@ -62,13 +68,13 @@ const EventViewDisplay = () => {
     if (status === "loading") return <Spinner />
     else if (status === "error") return <h1> Data fetch error </h1>
     else if (status === "success") {
-        const newData = data.length>0 && data.map((item: any) => {
+        const newData = data.data.length>0 && data.data.map((item: any) => {
             const formattedStartDate = new Date(item.content.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
             const formattedEndDate = new Date(item.content.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});
             
             return {
                 ...item,
-                startDate:formattedStartDate,
+                startDate:formattedStartDate, 
                 endDate:formattedEndDate,
             };
         });

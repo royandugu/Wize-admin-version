@@ -8,7 +8,7 @@ export const GET=async (request:NextRequest,{params}:{params:{id:any}}):Promise<
     try{
     const {id}=params;
     const response=await getIndvData(id,eventModel);
-    return NextResponse.json(response.bodyData,{status:response.status})
+    return NextResponse.json({data:response.bodyData},{status:response.status})
     }
     catch(err){
         return NextResponse.json({err},{status:StatusCodes.INTERNAL_SERVER_ERROR})
