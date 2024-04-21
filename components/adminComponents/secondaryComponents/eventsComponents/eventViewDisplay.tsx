@@ -6,13 +6,12 @@ import { useState, useContext, useEffect } from "react";
 import { deleteFile } from "../../../systemComponents/microFunctions/deleteFile";
 import { useEdgeStore } from '@/lib/edgestore';
 import { EventType } from "../../../systemComponents/types/types";
+import { universalDelete } from "../../../systemComponents/apiConnectors/system/DELETE";
 
-import parse from "html-react-parser"
 import Spinner from "../../../systemComponents/modules/spinner";
 import PopUp from "../../../systemComponents/modules/popUp";
 import Table from "../../primaryComponents/table";
 import context from "../../../systemComponents/context/context";
-import { universalDelete } from "../../../systemComponents/apiConnectors/system/DELETE";
 
 const EventViewDisplay = () => {
     const [showPopUp,setShowPopUp]=useState(false);
@@ -33,8 +32,6 @@ const EventViewDisplay = () => {
 
 
     const { data, status, refetch } = useQuery("all-events", () => universalGet("/events"));
-
-    console.log(data);
 
     useEffect(()=>{
         contextContainer.setLoading(1);
@@ -66,9 +63,8 @@ const EventViewDisplay = () => {
     else if (status === "error") return <h1> Data fetch error </h1>
     else if (status === "success") {
         const newData = data.length>0 && data.map((item: any) => {
-            const formattedStartDate = new Date(item.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
-
-            const formattedEndDate = new Date(item.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});
+            const formattedStartDate = new Date(item.content.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12:false});
+            const formattedEndDate = new Date(item.content.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',hour12:false});
             
             return {
                 ...item,

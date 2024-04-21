@@ -39,10 +39,11 @@ const Table = (props: Table) => {
               ))}
             </tr>
             {props.tableCols.length>0 && props.tableCols.map((item: any, index) => (
+              
               <tr key={index} className="p-4 mb-4">
                 {props.dataKeys.map((key, i) => (
                   <td key={i} className="p-5 border border-[rgb(200,200,200)]">
-                    {props.hasImage ? i === 0 ? <img src={item[key]} className="w-full h-[100px]" /> : item[key] : item[key]}
+                    {props.hasImage ? i === 0 ? <img src={item.content[key]} className="w-full h-[100px]" /> : item.content[key] : item.content[key]}
                   </td>
                 ))}
                 <td className="p-5 border border-[rgb(200,200,200)]">
