@@ -17,6 +17,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
     const [file, setFile] = useState<File | undefined>();
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("");
+    const [location,setLocation]=useState("");
     const [googleFormUrl, setGoogleFormUrl] = useState("");
     const [noTrimmer, setNoTrimmer] = useState(true);
     const [dateTimeCombo, setDateTimeCombo] = useState({
@@ -39,6 +40,7 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                     <div className="flex gap-5"> <input type="date" value={dateTimeCombo.endDate} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endDate: e.target.value })} /> <input type="time" value={dateTimeCombo.endTime} className="p-2 border border-[rgb(200,200,200)]" onChange={(e) => setDateTimeCombo({ ...dateTimeCombo, endTime: e.target.value })} /></div>
                 </div>
                 <input type="text" value={googleFormUrl} placeholder="Google form url" className="p-2 mt-10 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setGoogleFormUrl(e.target.value)} />
+                <input type="text" value={location} placeholder="Event location" className="p-2 mt-10 border border-[rgb(200,200,200)] w-full h-[40px]" onChange={(e) => setLocation(e.target.value)} />
 
                 <h1 className="mt-8"> Event banner : </h1>
                 <ImageUpload setFile={setFile} fullWidth={true} image={image} setImage={setImage} noTrimmer={noTrimmer} setNoTrimmer={setNoTrimmer} />
@@ -51,7 +53,9 @@ const EventCreateDisplay = (prop: EventCreateDisplay) => {
                     dateTimeCombo,
                     googleFormUrl,
                     image,
-                    file
+                    file,
+                    location,
+                    setLocation
                 }} noInitialPara={true} />
             </form>
         </>

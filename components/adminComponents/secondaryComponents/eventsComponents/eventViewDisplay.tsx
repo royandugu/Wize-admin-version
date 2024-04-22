@@ -24,7 +24,8 @@ const EventViewDisplay = () => {
                 startDate: new Date(),
                 endDate: new Date(),
                 banner: "",
-                body: ""
+                body: "",
+                location:""
             }
         });
 
@@ -80,7 +81,7 @@ const EventViewDisplay = () => {
         });
         return (
             <>
-                <Table title="Your events" tableRows={["Banner", "Title", "Start date", "End date", "Action"]} dataKeys={["banner", "title", "startDate", "endDate"]} tableCols={newData} hasImage={true} parseOn={5} setShowPopUp={setShowPopUp} setSelectedData={setSelectedEventInfo} updateDestination={"/admin/events/update"}/>
+                <Table title="Your events" tableRows={["Banner", "Title", "Location", "Start date", "End date", "Action"]} dataKeys={["banner", "title", "location", "startDate", "endDate"]} tableCols={newData} hasImage={true} parseOn={5} setShowPopUp={setShowPopUp} setSelectedData={setSelectedEventInfo} updateDestination={"/admin/events/update"}/>
                 <PopUp title="Delete event" showPopUp={showPopUp} setShowPopUp={setShowPopUp} buttonTexts={["Delete event"]} body="Are you sure you want to delete the selected event?" contextContainer={contextContainer} functionLists={[deleteEvent]} finalMessage="Your event has been sucesfully deleted" errorMessage="Failed to delete the event"/>
             </>
         )

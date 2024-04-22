@@ -22,6 +22,10 @@ const eventSchema = new mongoose.Schema({
         banner: {
             type: String
         },
+        location:{
+            type:String,
+            required:[true, "Event location must be present"]
+        },
         cms: [
             {
                 title: String,

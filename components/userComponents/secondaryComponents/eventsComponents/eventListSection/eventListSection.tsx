@@ -5,7 +5,6 @@ import { FiSearch } from "react-icons/fi";
 import { universalGet } from "../../../../systemComponents/apiConnectors/system/GET";
 
 import Link from "next/link";
-import parse from "html-react-parser";
 
 import Spinner from "../../../../systemComponents/modules/spinner";
 
@@ -32,25 +31,24 @@ const EventListSection = () => {
                             Day </button>
                     </div>
                 </div>
-                {data.map((event: any, i: number) => (
+                {data.data.map((event: any, i: number) => (
                     <Link href={`/events/${event._id}`}>
                         <div className="bg-white cursor-pointer shadow-xl mt-10 flex flex-col xl:flex-row rounded-md xl:pr-10" data-aos="fade-left">
                             <div className="pl-5 pr-5 pb-5 xl:pb-0 text-center pt-10 border-b xl:border-r xl:border-b-0 text-white bg-grad-one">
                                 <div className="flex gap-2 xl:flex-col xl:gap-0">
-                                    <h1 className="font-bold"> {new Date(event.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</h1>
+                                    <h1 className="font-bold"> {new Date(event.content.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</h1>
                                 </div>
                             </div>
                             <div className="w-2/3 pt-10 pl-10 pr-10 xl:pr-0">
-                                <h1 className="text-grad-one"> {new Date(event.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false })} - {new Date(event.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false })} </h1>
-                                <h1 className="text-[25px]"> {event.title} </h1>
+                                <h1 className="text-grad-one"> {new Date(event.content.startDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false })} - {new Date(event.content.endDate).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false })} </h1>
+                                <h1 className="text-[25px]"> {event.content.title} </h1>
                                 <p className="text-light-black text-[14px] leading-[1px] mb-10"> Admin </p>
-                                <p className="xl:mb-10 "> {parse(event.body.slice(0, 150))} ... </p>
                             </div>
                             <div className="xl:hidden p-5 xl:p-0">
-                                <img src={event.banner} alt="Teaching" className="xl:ml-10 xl:mt-5 xl:mb-5 rounded-md" />
+                                <img src={event.content.banner} alt="Teaching" className="xl:ml-10 xl:mt-5 xl:mb-5 rounded-md" />
                             </div>
                             <div className="w-1/3 pr-5">
-                                <img src={event.banner} alt="Teaching" className="w-full hidden xl:block xl:ml-10 xl:mt-5 xl:mb-5 rounded-md" />
+                                <img src={event.content.banner} alt="Teaching" className="w-full hidden xl:block xl:ml-10 xl:mt-5 xl:mb-5 rounded-md" />
                             </div>
                         </div>
                     </Link>

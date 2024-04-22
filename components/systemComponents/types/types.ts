@@ -8,6 +8,7 @@ export type EventType = {
         endDate: Date;
         banner: string;
         body: string;
+        location:string;
     }
 }
 

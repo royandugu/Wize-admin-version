@@ -52,7 +52,9 @@ type extra = {
     image: string,
     dateTimeCombo: { startDate: string, startTime: string, endDate: string, endTime: string },
     googleFormUrl: string,
-    file: File | undefined
+    file: File | undefined,
+    location:string,
+    setLocation:Dispatch<SetStateAction<string>>
 }
 
 
@@ -71,7 +73,6 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
 
     const { edgestore } = useEdgeStore();
 
-    console.log(data);
     useEffect(() => {
         if (status === "success") {
 
@@ -83,6 +84,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                 endDate: data.data.content.endDate.split('T')[0],
                 endTime: data.data.content.endDate.split('T')[1].split('.')[0]
             })
+            extra?.setLocation(data.data.content.location);
             extra?.setImage(data.data.content.banner);
 
             data.data.content.cms.forEach((cnts: any, index: number) => {
@@ -113,6 +115,7 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                 else body.banner = extra.image;
                 body.title = extra.title;
                 body.googleFormUrl = extra.googleFormUrl;
+                body.location=extra.location;
                 body.startDate = new Date(extra.dateTimeCombo.startDate + ' ' + extra.dateTimeCombo.startTime);
                 body.endDate = new Date(extra.dateTimeCombo.endDate + ' ' + extra.dateTimeCombo.endTime);
 
