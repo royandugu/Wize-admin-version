@@ -1,5 +1,3 @@
-"use client"
-
 import CardOne from "./dashboardComponents/cards/cardOne";
 import CardTwo from './dashboardComponents/cards/cardTwo';
 import CardThree from './dashboardComponents/cards/cardThree';

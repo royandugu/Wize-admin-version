@@ -42,7 +42,7 @@ const MainIndvEventSection = ({ image, body, startDate, endDate, title, googleLi
             <div className=" m-auto max-w-5xl mt-10 pb-20">
                 {body.map((cnt: cmsType, int: number) => (
                     <div key={int}>
-                        {cnt.title && <h1 className="text-[2.5rem]"> {cnt.title} </h1>}
+                        {cnt.title && <h1 className="text-[2.5rem]"> {cnt.title} </h1>} 
                         {cnt.subtitle && <div className="mt-5"> {parse(cnt.subtitle)} </div>}
                         {cnt.description && <div className="mt-5"> {parse(cnt.description)} </div>}
                         {cnt.image && typeof cnt.image === "string" && <img src={cnt.image} className="w-full mt-5" />}
