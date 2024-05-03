@@ -1,24 +1,5 @@
-"use client"
-
-import { QueryClientProvider, QueryClient } from 'react-query';
-
-
-require("dotenv").config();
-
 import AosWrapper from '../../../components/systemComponents/wrapper/aosWrapper';
-
-const queryClient = new QueryClient(
-    {
-        defaultOptions: {
-            queries: {
-                refetchOnWindowFocus: false,
-                refetchOnMount: false,
-                refetchOnReconnect: false,
-                retry: false
-            },
-        },
-    }
-);
+import NotLoggedClientProvider from '../../../components/systemComponents/queryClientProviders/notLoggedIn/notLoggedClientProvider';
 
 export default function RootLayout({
     children,
@@ -29,9 +10,9 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <AosWrapper>
-                    <QueryClientProvider client={queryClient}>
+                    <NotLoggedClientProvider>
                         {children}
-                    </QueryClientProvider>
+                    </NotLoggedClientProvider>
                 </AosWrapper>
             </body>
         </html>

@@ -1,5 +1,3 @@
-"use client"
-
 import { API_URL } from "../../../../API/globals/url";
 
 export const universalPatch = async (data:any,url:string) => {

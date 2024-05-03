@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useState, useEffect, SetStateAction } from "react";
-import { EventType, cmsType } from "../../../systemComponents/types/types";
+import { cmsType } from "../../../systemComponents/types/types";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";

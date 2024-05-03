@@ -1,5 +1,3 @@
-"use client"
-
 import { API_URL } from "../../../../API/globals/url";
 
 export const universalJSONPost = async (data:any,url:string) => {

@@ -1,5 +1,3 @@
-"use client"
-
 import { MdOutlineTitle } from "react-icons/md";
 import { MdOutlineSubtitles } from "react-icons/md";
 import { MdDescription } from "react-icons/md";

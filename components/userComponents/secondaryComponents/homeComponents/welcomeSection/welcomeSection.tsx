@@ -1,5 +1,3 @@
-"use client"
-
 import ButtonDesign from "../../../../systemComponents/modules/buttonDesign";
 import "./welcomeSection.css";
 

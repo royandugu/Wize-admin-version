@@ -21,12 +21,12 @@ const CmsContentDisplay = ({ url, fetchkey, noStudyAbroadForm, page }: { url: st
                     {!noStudyAbroadForm && <StudyAbroadForm />}
                     <div className="pl-10 pr-10 md:pr-20">
                         {data.data.content.cms.map((cnt: cmsType, int: number) => (
-                            <>
+                            <div key={int}>
                                 {cnt.title && <h1 className="text-[2.5rem]"> {cnt.title} </h1>}
                                 {cnt.subtitle && <div className="mt-5"> {parse(cnt.subtitle)} </div>}
                                 {cnt.description && <div className="mt-5"> {parse(cnt.description)} </div>}
                                 {cnt.image && typeof cnt.image === "string" && <img src={cnt.image} className="w-full mt-5"/>}
-                            </>
+                            </div>
                         ))}
                     </div>
                 </div>
