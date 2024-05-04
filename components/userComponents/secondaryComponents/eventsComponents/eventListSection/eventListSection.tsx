@@ -32,7 +32,7 @@ const EventListSection = () => {
                     </div>
                 </div>
                 {data.data.map((event: any, i: number) => (
-                    <Link href={`/events/${event._id}`}>
+                    <Link key={i} href={`/events/${event._id}`}>
                         <div className="bg-white cursor-pointer shadow-xl mt-10 flex flex-col xl:flex-row rounded-md xl:pr-10" data-aos="fade-left">
                             <div className="pl-5 pr-5 pb-5 xl:pb-0 text-center pt-10 border-b xl:border-r xl:border-b-0 text-white bg-grad-one">
                                 <div className="flex gap-2 xl:flex-col xl:gap-0">
