@@ -20,21 +20,21 @@ const NavigationContainer=({dispNumber,showDropDown,setDispNumber,setShowDropDow
         <ul className="flex navigationContainer">
             <li className="navigationContainer--noDropDowns">
                 {primaryRoute.map((route,i)=>(
-                    <Link href={route.url} className="mr-12" key={i}> {route.text} </Link>
+                    <Link href={route.url} className="mr-12" key={i}>{route.text}</Link>
                 ))}
             </li>
             <li>
-                <Link href="/education" className="mr-12 relative" onMouseEnter={()=>{
+                <Link href="/education" className="mr-12 relative navigationContainer--dropDowns" onMouseEnter={()=>{
                     setDispNumber(0);
                     setShowDropDown(true);
-                }} onMouseLeave={()=>setShowDropDown(false)}> <label className="navigationContainer--dropDowns">Education</label> </Link>
+                }} onMouseLeave={()=>setShowDropDown(false)}>Education </Link>
                 <EducationAndMigrationDropDown dispNumber={dispNumber} showDropDown={showDropDown} setShowDropDown={setShowDropDown} showEducationPage={true} moveMenuUp={moveMenuUp}/>
             </li>
             <li>
-                <Link href="/migration" onMouseEnter={()=>{
+                <Link href="/migration" className="navigationContainer--dropDowns" onMouseEnter={()=>{
                         setDispNumber(1);
                         setShowDropDown(true);    
-                }} onMouseLeave={()=>setShowDropDown(false)}> <label className="navigationContainer--dropDowns"> Migration </label></Link>
+                }} onMouseLeave={()=>setShowDropDown(false)}> Migration </Link>
                 <EducationAndMigrationDropDown  dispNumber={dispNumber} showDropDown={showDropDown} setShowDropDown={setShowDropDown} showEducationPage={false} moveMenuUp={moveMenuUp}/>
             </li>
         </ul>

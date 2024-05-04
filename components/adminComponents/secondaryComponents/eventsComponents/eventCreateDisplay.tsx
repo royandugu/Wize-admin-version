@@ -4,9 +4,8 @@ import ImageUpload from "../../../systemComponents/modules/imageUpload";
 
 import { useState } from "react";
 
-import 'react-quill/dist/quill.snow.css';
-
 import CmsDisplay from "../../primaryComponents/cms/cmsDisplay";
+import 'react-quill/dist/quill.snow.css';
 
 type EventCreateDisplay = {
     updateId?: string

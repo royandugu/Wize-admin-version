@@ -1,6 +1,4 @@
-import dynamic from 'next/dynamic';
-
-const EventCreateDisplay = dynamic(() => import('../../../../../../components/adminComponents/secondaryComponents/eventsComponents/eventCreateDisplay'), { ssr: false })
+import EventCreateDisplay from '../../../../../../components/adminComponents/secondaryComponents/eventsComponents/eventCreateDisplay';
 
 const Page=({params}:{params:{id:string}})=>{
     const {id}=params;

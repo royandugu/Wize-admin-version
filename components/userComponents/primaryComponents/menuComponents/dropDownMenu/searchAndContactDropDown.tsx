@@ -35,10 +35,14 @@ const SearchAndContactDropDown = ({ dispNumber, showDropDown, setShowDropDown, s
                         <Link href="/"> Events </Link>
                     </li>
                     <li className="mt-2">
-                        <Link href="/" className="relative"> <label className="navigationContainer--dropDowns">Education</label> </Link>
+                        <div className="relative">
+                            <Link href="/" className="relative"> Education </Link>
+                        </div>
                     </li>
                     <li className="mt-2">
-                        <Link href="/"> <label className="navigationContainer--dropDowns"> Migration </label></Link>
+                        <div className="relative">
+                            <Link href="/"> Migration </Link>
+                        </div>
                     </li>
                     <div className="mt-5">
                         <div className="flex relative">

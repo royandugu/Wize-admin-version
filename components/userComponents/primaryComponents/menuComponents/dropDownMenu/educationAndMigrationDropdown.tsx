@@ -21,13 +21,13 @@ const EducationAndMigrationDropDown = ({ dispNumber, showDropDown, setShowDropDo
             {(dispNumber === 0 && showEducationPage) ? (
                 educationRoutes.map((route, i) => (
                     <li key={i} className="border-b border-[rgb(230,230,230)] px-10 p-5">
-                        <Link href={route.url}> {route.text} </Link>
+                        <Link href={route.url}>{route.text}</Link>
                     </li>
                 ))
             ) : (dispNumber === 1 && !showEducationPage) && (
                 migrationRoutes.map((route, i) => (
                     <li key={i} className="border-b border-[rgb(230,230,230)] px-10 p-5">
-                        <Link href={route.url}> {route.text} </Link>
+                        <Link href={route.url}>{route.text}</Link>
                     </li>
                 ))
             )}

@@ -1,6 +1,5 @@
-import dynamic from "next/dynamic";
+import QuizViewDisplay from "../../../../components/adminComponents/secondaryComponents/quizComponents/quizViewDisplay";
 
-const QuizViewDisplay = dynamic(() => import("../../../../components/adminComponents/secondaryComponents/quizComponents/quizViewDisplay"), { ssr: false })
 const Page=()=>{
     return <QuizViewDisplay/>
 }

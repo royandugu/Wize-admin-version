@@ -4,9 +4,7 @@ import { useEffect } from "react";
 
 import Aos from "aos";
 import Footer from "../../userComponents/primaryComponents/footerComponents/footer";
-import dynamic from "next/dynamic";
-
-const MenuDisplay = dynamic(() => import('../../userComponents/primaryComponents/menuComponents/menuDisplay'), { ssr: false })
+import MenuDisplay from "../../userComponents/primaryComponents/menuComponents/menuDisplay";
 
 import "aos/dist/aos.css";
 
