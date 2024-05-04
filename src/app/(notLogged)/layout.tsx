@@ -7,15 +7,11 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body>
-                <AosWrapper>
-                    <NotLoggedClientProvider>
-                        {children}
-                    </NotLoggedClientProvider>
-                </AosWrapper>
-            </body>
-        </html>
+        <AosWrapper>
+            <NotLoggedClientProvider>
+                {children}
+            </NotLoggedClientProvider>
+        </AosWrapper>
     )
 
 }

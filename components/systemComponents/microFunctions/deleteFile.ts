@@ -16,7 +16,6 @@ export const deleteFile=async (url:string|undefined, edgestore:any):Promise<{sta
         return returnObj;
       }
       catch (err) {
-        console.log(err);
         return returnObj;
     }
 }

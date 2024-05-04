@@ -46,7 +46,6 @@ const EventViewDisplay = () => {
     const deleteEvent=async (e:any)=>{
         e.preventDefault();
         contextContainer.setLoading(0);
-        console.log(selectedEventInfo);
         try{
             if (selectedEventInfo.content.banner) {
                 const { status } = await deleteFile(selectedEventInfo.content.banner, edgestore);
@@ -61,7 +60,6 @@ const EventViewDisplay = () => {
             else contextContainer.setLoading(3);         
         }
         catch(err:any){
-            console.log(err);
             contextContainer.setLoading(3);
         }
     }

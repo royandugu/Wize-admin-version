@@ -19,7 +19,6 @@ export const uploadFile=async (file:File|undefined, edgestore:any):Promise<{data
         return returnObj;
       }
       catch (err) {
-        console.log(err);
         return returnObj;
     }
 }

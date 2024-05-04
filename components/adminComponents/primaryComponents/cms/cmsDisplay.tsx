@@ -156,7 +156,6 @@ const CmsDisplay = ({ updateLink, getLink, fetchQueryName, eventCreate, extra, c
                 contextContainer.setLoading(3);
             }
         } catch (err) {
-            console.log(err);
             contextContainer.setLoading(3);
         }
     }

@@ -42,43 +42,6 @@ hunxa. Now on the basis of that changed position hamro content tesari naii auxa 
 haru implement hannu parxa.
  
  
-## CMS submit function
-const submitForm = async () => {
-        let revert = false;
-        let index = 0;
-
-        contextContainer.setLoading(0);
-        try {
-            const promises = dataContents.map(async (cnts) => {
-                if (cnts.image && cnts.image instanceof File && typeof cnts === 'object') {
-                    console.log("first")
-                    const { data: imageOneUrl, status: imageOneStatus } = await uploadFile(cnts.image, edgestore);
-                    if (imageOneStatus) {
-                        cnts.image = imageOneUrl;
-                        ++index;
-                    } else {
-                        contextContainer.setLoading(3);
-                        revert = true;
-                        return;
-                    }
-                }
-            });
-
-            await Promise.all(promises);
-
-            if (!revert) {
-                const response = await universalJSONPost({ content: dataContents }, uploadLink);
-                index++;
-                console.log(index);
-                if (response?.ok) contextContainer.setLoading(2);
-                else contextContainer.setLoading(3);
-            } else {
-                contextContainer.setLoading(3);
-            }
-        } catch (err) {
-            contextContainer.setLoading(3);
-        }
-    }
 
 
 

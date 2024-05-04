@@ -7,15 +7,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
-        <AdminClientProvider>
-          <DashboardLayout>
-
-            {children}
-          </DashboardLayout>
-        </AdminClientProvider>
-      </body>
-    </html>
+    <AdminClientProvider>
+      <DashboardLayout>
+        {children}
+      </DashboardLayout>
+    </AdminClientProvider>
   )
 } 

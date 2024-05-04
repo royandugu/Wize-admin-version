@@ -9,16 +9,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="flex h-screen overflow-auto">
-          <div className="w-full md:w-1/2 flex justify-center items-center flex-col">
-            {children}
-          </div>
-          <div className="w-1/2 hidden md:block" style={{background:"url(/images/sydney-cbd-from-ferry-boat2.jpg)", backgroundSize:"cover"}}>
-          </div>    
-        </div>
-      </body> 
-    </html> 
+    <div className="flex h-screen overflow-auto">
+      <div className="w-full md:w-1/2 flex justify-center items-center flex-col">
+        {children}
+      </div>
+      <div className="w-1/2 hidden md:block" style={{ background: "url(/images/sydney-cbd-from-ferry-boat2.jpg)", backgroundSize: "cover" }}>
+      </div>
+    </div>
   )
 }

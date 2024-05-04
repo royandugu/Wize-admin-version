@@ -12,7 +12,6 @@ export const POST=async (request:NextRequest):Promise<any>=>{
         return NextResponse.json({message:response.message},{status:StatusCodes.CREATED});
     }
     catch(err:any){
-        console.log(err);
         return NextResponse.json({message:err.message},{status:StatusCodes.BAD_REQUEST})
     }
 }  

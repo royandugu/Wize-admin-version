@@ -21,7 +21,6 @@ export const createData = async (body: object, model: any) => {
         setMessageAndResponse("Sucesfully created", createdData, StatusCodes.OK);
     }
     catch (err: any) {
-        console.log(err);
         setMessageAndResponse(err.message, null, StatusCodes.INTERNAL_SERVER_ERROR);
     }
     return response;
