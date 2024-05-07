@@ -25,6 +25,8 @@ export const options: NextAuthOptions = {
         async authorize(credentials, req) {
           const userValidation={email:"hello@gmail.com", password:"1234",role:"user"}
           const adminValidation={email:"admin@admin.com", password:"12345", role:"admin"}
+          
+          
           if(credentials?.email === userValidation.email && credentials?.password === userValidation.password){
             return JSON.parse(JSON.stringify(userValidation));
           }

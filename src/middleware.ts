@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(request:NextRequestWithAuth){
-    if(request.nextauth.token?.role === "admin") return NextResponse.rewrite(new URL('/admin/dashboard', request.url));
-    else if(request.nextauth.token?.role === "user") return NextResponse.rewrite(new URL('/user/dashboard', request.url));
+     if(!request.nextauth.token?.role) return NextResponse.rewrite(new URL("/login", request.url));
   },
   {
     callbacks:{
@@ -14,5 +13,5 @@ export default withAuth(
 )
 
 export const config={
-  matcher:["/admin/dashboard"]
+  matcher:["/admin/:path*"]
 }
