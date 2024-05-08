@@ -7,4 +7,12 @@ const connectDB=()=>{
     else return false;
 }
 
+const connectEducationDB=()=>{
+    
+}
+
+const connectMigrationDB=()=>{
+
+}
+
 export default connectDB;

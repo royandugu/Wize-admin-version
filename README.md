@@ -54,4 +54,7 @@ haru implement hannu parxa.
 2. The type cmsType has initialPara as optional in types but in database schema it is a must required
 3. Colleges ko API xaina 
 4. Global classes for h1, h5 and p 
-   
+
+
+## Note 
+To connect to a diffrent database, put the database name after the .net/ of MONGO_URI. 
