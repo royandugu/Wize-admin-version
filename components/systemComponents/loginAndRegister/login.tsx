@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 
 import Link from "next/link";
 
@@ -9,6 +11,7 @@ import "./loginAndRegister.css";
 
 
 const Login = () => {
+    const router = useRouter();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,12 +20,13 @@ const Login = () => {
     const sendLoginRequest = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        await signIn("credentials", {
+        const response = await signIn("credentials", {
             email: email,
             password: password,
             redirect: false,
             callbackUrl: "/admin/dashboard"
         })
+        if (response?.status) router.push("/admin/dashboard");
     }
 
     return (

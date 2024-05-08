@@ -1,7 +1,21 @@
-import { NextRequest,NextResponse } from "next/server";
-// import { loginAdmin } from "../../../../../../API/controllers/admin/registerAndLogin";
-// import { StatusCodes } from "http-status-codes";
+import { NextRequest, NextResponse } from "next/server"
+import { getOneData } from "../../../../../../API/controllers/controllers";
+import { StatusCodes } from "http-status-codes";
+import { compareSync } from "bcryptjs";
+import adminModel from "../../../../../../API/models/adminModel/adminModel";
+
+export const dynamic = 'force-dynamic';
 
 export const POST=async (request:NextRequest):Promise<any>=>{
-    return NextResponse.json({message:"Hello"},{status:200})
+    try{
+        const {password}=await request.json();
+        const response=await getOneData(adminModel);
+        const result=compareSync(password,response.bodyData.password);
+        return NextResponse.json({loginStatus:result, bodyData:response.bodyData},{status:response.status})
+    }
+    catch(err:any){
+        return NextResponse.json({message:err.message},{status:StatusCodes.INTERNAL_SERVER_ERROR});
+    }
 }
+
+

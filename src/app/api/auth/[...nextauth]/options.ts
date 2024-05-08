@@ -1,4 +1,5 @@
 import { NextAuthOptions } from "next-auth";
+import { universalJSONPost } from "../../../../../components/systemComponents/apiConnectors/system/POST";
 
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -23,17 +24,12 @@ export const options: NextAuthOptions = {
           password: { label: "Password", type: "password" }
         },
         async authorize(credentials, req) {
-          const userValidation={email:"hello@gmail.com", password:"1234",role:"user"}
-          const adminValidation={email:"admin@admin.com", password:"12345", role:"admin"}
-          
-          
-          if(credentials?.email === userValidation.email && credentials?.password === userValidation.password){
-            return JSON.parse(JSON.stringify(userValidation));
+          const response:any = await universalJSONPost({email:credentials?.email, password:credentials?.password},"/admin/login");
+          const jsonVersion=await response.json();
+          if(jsonVersion?.loginStatus){
+            return JSON.parse(JSON.stringify(jsonVersion.bodyData));
           }
-          if(adminValidation.email === credentials?.email && adminValidation.password == credentials?.password){
-            return JSON.parse(JSON.stringify(adminValidation));
-          }
-          return null
+          else return null;
         }
       })
       
