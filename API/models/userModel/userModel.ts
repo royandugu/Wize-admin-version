@@ -17,7 +17,43 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:[true, "Password is required"],
         match:[/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,"Please provide a valid password"]
-    }
+    },
+    educationalBackgrond:[
+        {
+            schoolName:{
+                type:String,
+                required:[true, "School name is required"]
+            },
+            startDate:{
+                type:Date,
+                required:[true, "Start date must be present"]
+            },
+            endDate:Date,
+            subjectName:{
+                type:String,
+                required:[true, "Subject name must be present"]
+            }  
+        }
+    ],
+    professionalBackground:[
+        {
+            companyName:{
+                type:String,
+                required:[true, "Company name must be present"]
+            },
+            startDate:{
+                type:Date,
+                required:[true, "Starting date must be present"]
+            },
+            endDate:{
+                type:Date
+            },
+            jobPost:{
+                type:String,
+                required:[true,"Job post is required"]
+            }
+        }
+    ]
 },{timestamps:true})
 
 const userModel=mongoose.models.user || mongoose.model("user",userSchema); 

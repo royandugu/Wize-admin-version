@@ -7,7 +7,6 @@ import Provider from './sessionProvider';
 import ContextState from '../../components/systemComponents/context/contextStates';
 import { EdgeStoreProvider } from '@/lib/edgestore';
 
-import connectDB from '../../API/connector/connector';
 
 import "./globals.css";
 
@@ -25,7 +24,6 @@ export default async function RootLayout({
 }) {
     try {
         if (process.env.MONGO_URI) {
-            await connectDB();
             return (
                 <html lang="en">
                     <body className={inter.className} suppressHydrationWarning={true}>

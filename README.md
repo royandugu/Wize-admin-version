@@ -58,3 +58,4 @@ haru implement hannu parxa.
 
 ## Note 
 To connect to a diffrent database, put the database name after the .net/ of MONGO_URI. 
+Upload Image garda paila upload garne ani delete garne balla.
