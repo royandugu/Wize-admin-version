@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { updateData } from "../../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
+import { connectEducationDB } from "../../../../../../../../API/connector/connector";
 
 import { pyModel } from "../../../../../../../../API/models/cmsModel/cmsModel";
 
@@ -10,7 +11,7 @@ export const PATCH=async (request:NextRequest,{params}:{params:{id:string}}):Pro
     try{
         const {id}=params;
         const jsonReq=await request.json();
-        const response=await updateData(id,jsonReq,pyModel);
+        const response=await updateData(id,jsonReq,pyModel, connectEducationDB);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){

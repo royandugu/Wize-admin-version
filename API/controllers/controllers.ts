@@ -1,8 +1,9 @@
 import { StatusCodes } from "http-status-codes";
 import { response, setMessageAndResponse } from "../modules/eventModules";
 
-export const updateData = async (id: string, body: object, model: any) => {
+export const updateData = async (id: string, body: object, model: any, connectFucntion:() => false | Promise<typeof import("mongoose")>) => {
     try {
+        await connectFucntion();
         const updatedData = await model.findOneAndUpdate({ _id: id }, body, { new: true, runValidators: true });
         setMessageAndResponse("Sucesfully updated", updatedData, StatusCodes.OK);
     }
@@ -12,8 +13,9 @@ export const updateData = async (id: string, body: object, model: any) => {
     return response;
 }
 
-export const createData = async (body: object, model: any) => {
+export const createData = async (body: object, model: any,connectFucntion:() => false | Promise<typeof import("mongoose")>) => {
     try {
+        await connectFucntion();
         const createdData = await model.create(body);
         setMessageAndResponse("Sucesfully created", createdData, StatusCodes.OK);
     }
@@ -23,8 +25,9 @@ export const createData = async (body: object, model: any) => {
     return response;
 }
 
-export const getIndvData = async (id: string, model: any) => {
+export const getIndvData = async (id: string, model: any,connectFucntion:() => false | Promise<typeof import("mongoose")>) => {
     try {
+        await connectFucntion();
         const indvData = await model.findOne({ _id: id });
         if (!indvData) setMessageAndResponse("The data does not exist", null, StatusCodes.NOT_FOUND);
         else setMessageAndResponse("Your desired data", indvData, StatusCodes.OK);
@@ -35,8 +38,9 @@ export const getIndvData = async (id: string, model: any) => {
     return response;
 }
 
-export const getAllData = async (model: any) => {
+export const getAllData = async (model: any,connectFucntion:() => false | Promise<typeof import("mongoose")>) => {
     try {
+        await connectFucntion();
         const data = await model.find({}).sort({ updatedAt: -1 });
         setMessageAndResponse("All your data", data, StatusCodes.OK);
     }
@@ -46,8 +50,9 @@ export const getAllData = async (model: any) => {
     return response;
 }
 
-export const deleteData=async (id:string,model:any)=>{
+export const deleteData=async (id:string,model:any,connectFucntion:() => false | Promise<typeof import("mongoose")>)=>{
     try{
+        await connectFucntion();
         const data=await model.findOneAndDelete({_id:id});
         setMessageAndResponse("Data sucesfully deleted", data, StatusCodes.OK);
     }
@@ -57,8 +62,9 @@ export const deleteData=async (id:string,model:any)=>{
     return response;
 }
 
-export const getOneData = async (model: any) => {
+export const getOneData = async (model: any,connectFucntion:() => false | Promise<typeof import("mongoose")>) => {
     try {
+        await connectFucntion();
         const indvData = await model.findOne({});
         if (!indvData) setMessageAndResponse("The data does not exist", null, StatusCodes.NOT_FOUND);
         else setMessageAndResponse("Your desired data", indvData, StatusCodes.OK);

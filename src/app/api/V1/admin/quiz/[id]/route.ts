@@ -3,13 +3,14 @@ import { getIndvData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import quizModel from "../../../../../../../API/models/quizModel/quizModel";
+import { connectQuizDB } from "../../../../../../../API/connector/connector";
 
 export const dynamic = 'force-dynamic';
 
 export const GET = async (request: NextRequest, { params }: { params: { id: any } }): Promise<any> => {
     try {
         const { id } = params;
-        const response = await getIndvData(id, quizModel);
+        const response = await getIndvData(id, quizModel,connectQuizDB);
         return NextResponse.json(response.bodyData, { status: response.status })
     }
     catch (err) {

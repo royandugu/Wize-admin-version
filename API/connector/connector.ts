@@ -27,6 +27,7 @@ export const connectEventsDB=()=>{
     else return false;
 }
 
+
 export const connectQuizDB=()=>{
     if(process.env.MONGO_URI_QUIZES) return connect(process.env.MONGO_URI_QUIZES);
     else return false;

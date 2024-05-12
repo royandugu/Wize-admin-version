@@ -3,13 +3,14 @@ import { createData } from "../../../../../../../API/controllers/controllers";
 import { StatusCodes } from "http-status-codes";
 
 import { pteModel } from "../../../../../../../API/models/cmsModel/cmsModel";
+import { connectEducationDB } from "../../../../../../../API/connector/connector";
 
 export const dynamic = 'force-dynamic';
 
 export const POST=async (request:NextRequest):Promise<any>=>{
     try{
         const jsonReq=await request.json();
-        const response=await createData(jsonReq,pteModel);
+        const response=await createData(jsonReq,pteModel,connectEducationDB);
         return NextResponse.json({message:response.message,createdEvent:response.bodyData},{status:response.status})
     }
     catch(err:any){
