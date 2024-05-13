@@ -29,7 +29,7 @@ const EventListSection = () => {
                             Month </button>
                         <button className="mainGradient pl-3 pr-3 pt-1 pb-1 text-white rounded-md flex align-center justify-between">
                             Day </button>
-                    </div>
+                    </div>  
                 </div>
                 {data?.data?.map((event: any, i: number) => (
                     <Link key={i} href={`/events/${event._id}`}>
